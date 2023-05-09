@@ -5,17 +5,21 @@ class Player : EasyDraw
 {
     public int radius { get { return _radius; } }
 
+    public bool lightWeight = true;
+
     public Vec2 position;
 
-    public float weight = .1f;
-
     private int _radius;
+
+    private float speed = 1f;
+    private float weight = .01f;
+    private float jumpSpeed = 5;
+
     private Vec2 velocity;
     private Vec2 acceleration;
-
     private Vec2 _oldPosition;
 
-    
+    private bool canJump;
 
     public Player(int pRadius, Vec2 pPosition) : base(pRadius * 2 + 1, pRadius * 2 + 1)
     {
@@ -33,7 +37,8 @@ class Player : EasyDraw
         Stroke(red, green, blue);
         Ellipse(_radius, _radius, 2 * _radius, 2 * _radius);
     }
-    public void FollowMouse()
+
+    public void Gravity()
     {
         velocity += acceleration;
         position += velocity;
@@ -47,22 +52,32 @@ class Player : EasyDraw
 
     void PlayerPhysics()
     {
+        Gravity();
         acceleration = new Vec2(0, weight);
     }
 
     public void Step()
     {
-        FollowMouse();
         PlayerPhysics();
+        PlayerControl();
 
         velocity *= 0.99f;
         _oldPosition = position;
         UpdateScreenPosition();
     }
 
-    void PlayerControl() {
-        if (Input.GetKey(Key.A)) { }
+    void PlayerControl()
+    {
+        if (Input.GetKey(Key.A)) { position -= new Vec2(speed * Time.deltaTime, 0); }
+        if (Input.GetKey(Key.D)) { position += new Vec2(speed * Time.deltaTime, 0); }
+
+        if (!lightWeight) return;
+        if (canJump && Input.GetKeyDown(Key.SPACE)) {
+            velocity -= new Vec2(0, jumpSpeed);
+            canJump = false;
+        }
     }
 
+    public void Land() { canJump = true; }
 }
 
