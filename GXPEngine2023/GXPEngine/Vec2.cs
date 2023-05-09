@@ -202,8 +202,3 @@ public struct Vec2
     }
 
 }
-
-
-
-
-
