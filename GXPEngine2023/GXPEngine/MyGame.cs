@@ -6,7 +6,7 @@ public class MyGame : Game {
 
 	private Player player;
 
-	public MyGame() : base(800, 600, false)     // Create a window that's 800x600 and NOT fullscreen
+	public MyGame() : base(1920, 1080, true)     // Create a window that's 800x600 and NOT fullscreen
 	{
 		CreateLevel();
 		//// Draw some things on a canvas:
