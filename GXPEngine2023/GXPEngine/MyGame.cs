@@ -9,9 +9,11 @@ public class MyGame : Game
 
     private Lever lever;
     private ResponsiveObject responsiveObject;
+    LevelLine line;
 
-    public MyGame() : base(800, 600, false)     // Create a window that's 800x600 and NOT fullscreen
+    public MyGame() : base(1920, 1080, false)     // Create a window that's 800x600 and NOT fullscreen
     {
+        line = new LevelLine();
         CreateLevel();
         //// Draw some things on a canvas:
         //EasyDraw canvas = new EasyDraw(800, 600);
