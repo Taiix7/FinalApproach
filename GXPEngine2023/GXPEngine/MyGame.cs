@@ -9,21 +9,11 @@ public class MyGame : Game
 
     private Lever lever;
     private ResponsiveObject responsiveObject;
-	public MyGame() : base(1920, 1080, true)     // Create a window that's 800x600 and NOT fullscreen
-	{
-		CreateLevel();
-		//// Draw some things on a canvas:
-		//EasyDraw canvas = new EasyDraw(800, 600);
-		//canvas.Clear(Color.MediumPurple);
-		//canvas.Fill(Color.Yellow);
-		//canvas.Ellipse(width / 2, height / 2, 200, 200);
-		//canvas.Fill(50);
-		//canvas.TextSize(32);
-		//canvas.TextAlign(CenterMode.Center, CenterMode.Center);
-		//canvas.Text("Welcome!", width / 2, height / 2);
+    LevelLine line;
 
-    public MyGame() : base(800, 600, false)     // Create a window that's 800x600 and NOT fullscreen
+    public MyGame() : base(1920, 1080, false)     // Create a window that's 800x600 and NOT fullscreen
     {
+        line = new LevelLine();
         CreateLevel();
         //// Draw some things on a canvas:
         //EasyDraw canvas = new EasyDraw(800, 600);

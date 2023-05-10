@@ -1,5 +1,4 @@
 ﻿using GXPEngine;
-using System.Collections.Generic;
 
 class Player : EasyDraw
 {
