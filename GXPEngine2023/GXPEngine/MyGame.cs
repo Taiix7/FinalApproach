@@ -4,7 +4,8 @@ using System.Drawing;                           // System.Drawing contains drawi
 
 public class MyGame : Game
 {
-
+    string level = "Level1.tmx";
+    string nextlevel = null;
     private Player player;
 
     private Lever lever;
@@ -15,6 +16,8 @@ public class MyGame : Game
     {
         line = new LevelLine();
         CreateLevel();
+        OnAfterStep += CheckLoadLevel;
+        LoadLevel(level);
         //// Draw some things on a canvas:
         //EasyDraw canvas = new EasyDraw(800, 600);
         //canvas.Clear(Color.MediumPurple);
@@ -49,6 +52,21 @@ public class MyGame : Game
         if (lever.IsMouseOver() && Input.GetMouseButtonDown(0))
         {
             lever.connectedObject.UpdateColor(152,242,0);
+        }
+    }
+
+    public void LoadLevel(string levelName)
+    {
+        nextlevel = levelName;
+    }
+
+    void CheckLoadLevel()
+    {
+        if (nextlevel != null)
+        {
+            //DestroyAll();
+            AddChild(new Level(nextlevel));
+            nextlevel = null;
         }
     }
 
