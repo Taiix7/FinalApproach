@@ -1,39 +1,60 @@
 using GXPEngine;
+using System;
+using System.Linq;
+using TiledMapParser;
 
-public class Lever : EasyDraw
+public class Lever : AnimationSprite
 {
-    public int radius { get { return _radius; } }
     public Vec2 position;
     public ResponsiveObject connectedObject;
-    
-    private int _radius;
 
-    public Lever(int pRadius, Vec2 pPosition, ResponsiveObject connectedObject) : base(pRadius * 2 + 1, pRadius * 2 + 1)
+
+    public int radius = 10;
+
+    public TiledObject obj;
+
+    public Lever(TiledObject obj = null) : base("lever.png", 2, 3)
     {
-        this._radius = pRadius;
-        this.position = pPosition;
-        this.connectedObject = connectedObject;
-
-        UpdateScreenPosition();
-        SetOrigin(_radius, _radius);
-        Draw(255, 255, 255);
-    }
-
-    void Draw(byte red, byte green, byte blue)
-    {
-        Fill(red, green, blue);
-        Stroke(red, green, blue);
-        Ellipse(_radius, _radius, 2 * _radius, 2 * _radius);
-    }
-
-    private void UpdateScreenPosition()
-    {
+        this.obj = obj;
+        position.x = obj.X;
+        position.y = obj.Y;
         x = position.x;
         y = position.y;
+        SetOrigin(radius, radius);
+        MyGame myGame = (MyGame)game;
+        myGame.levers.Add(this);
+
+        CreateResponsiveObject();
+        myGame.LateAddChild(connectedObject);
     }
 
-    public void UpdateColor(byte red, byte green, byte blue) {
-        this.Draw(red, green, blue);
+    /// <summary>
+    /// !!!!
+    /// When you create a new lever in Tiled you need to create 2 new custom properties that are called
+    /// 
+    /// connectedX
+    /// connectedY
+    /// 
+    /// And put the coordinated you want for the object that will response when the lever is detected object
+    /// 
+    /// NB! The names of the properties should be exactly like this!!
+    /// </summary>
+    void CreateResponsiveObject()
+    {
+        float floatValueX = 0;
+        float floatValueY = 0;
+        foreach (Property property in obj.propertyList.properties)
+        {
+            if (property.Name == "connectedX")
+            {
+                floatValueX = float.Parse(property.Value);
+            }
+            else if (property.Name == "connectedY")
+            {
+                floatValueY = float.Parse(property.Value);
+            }
+        }
+        connectedObject = new ResponsiveObject(20, new Vec2(floatValueX, floatValueY));
     }
 
     public bool IsMouseOver()

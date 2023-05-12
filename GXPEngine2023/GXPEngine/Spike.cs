@@ -7,6 +7,7 @@ public class Spike : Sprite
 {
     public int radius = 10;
     public Vec2 position;
+
     public Spike(TiledObject obj = null) : base("spike.png")
     {
         position.x = obj.X;

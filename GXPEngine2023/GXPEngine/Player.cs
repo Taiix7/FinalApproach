@@ -1,8 +1,9 @@
 using GXPEngine;
 using System;
+using System.Linq;
 using TiledMapParser;
 
-class Player : Sprite
+public class Player : Sprite
 {
     public int radius { get { return _radius; } }
 
@@ -15,11 +16,10 @@ class Player : Sprite
     public float difline;
     public GameObject latestCollision = null;
 
-    private float speed = 1f;
     public float mass = .1f;
-    private float jumpSpeed = 5;
 
     public Vec2 velocity;
+
     private Vec2 acceleration;
     private Vec2 _oldPosition;
 
@@ -48,7 +48,6 @@ class Player : Sprite
 
     void PlayerPhysics()
     {
-        
         Gravity();
         if (stickToWall && !moving) return;
         acceleration = new Vec2(0, mass);
@@ -63,6 +62,7 @@ class Player : Sprite
         velocity *= 0.99f;
         _oldPosition = position;
         UpdateScreenPosition();
+        acceleration += new Vec2(0, -0.1f);
     }
 
     void PlayerControl()
@@ -189,6 +189,22 @@ class Player : Sprite
                 position.y = 700;
                 velocity = new Vec2(0,0);
             }
+        }  
+        
+        foreach(Lever lever in myGame.levers)
+        {
+            Vec2 difVec = position - lever.position;
+
+            float minDist = radius + lever.radius;
+
+            float dist = difVec.Length();
+
+            if (minDist + 10 > dist)
+            {
+                lever.Animate(0.1f);
+                lever.connectedObject.Destroy();
+                
+            }
         }    
         
 
@@ -213,6 +229,11 @@ class Player : Sprite
             position -= (-difline + radius) * col.normal;
             velocity.Reflect(col.normal);
         }
+    }
+
+    public void ApplyForce(Vec2 force) {
+        acceleration.x -= force.x / mass;
+        acceleration.y -= force.y / mass;
     }
 }
 
