@@ -1,6 +1,8 @@
 ﻿using GXPEngine;
+using System;
+using TiledMapParser;
 
-class Player : EasyDraw
+class Player : Sprite
 {
     public int radius { get { return _radius; } }
 
@@ -8,13 +10,13 @@ class Player : EasyDraw
 
     public Vec2 position;
 
-    private int _radius;
+    private int _radius = 20;
 
     public float difline;
     public GameObject latestCollision = null;
 
     private float speed = 1f;
-    private float weight = .01f;
+    private float weight = .1f;
     private float jumpSpeed = 5;
 
     public Vec2 velocity;
@@ -22,22 +24,14 @@ class Player : EasyDraw
     private Vec2 _oldPosition;
 
     private bool canJump;
+    private bool stickToWall;
 
-    public Player(int pRadius, Vec2 pPosition) : base(pRadius * 2 + 1, pRadius * 2 + 1)
+    public Player(TiledObject obj = null) : base("Slime_Luca.png")
     {
-        this._radius = pRadius;
-        this.position = pPosition;
-
-        UpdateScreenPosition();
+        position.x = obj.X;
+        position.y = obj.Y;
+        //UpdateScreenPosition();
         SetOrigin(_radius, _radius);
-        Draw(255, 255, 255);
-    }
-
-    void Draw(byte red, byte green, byte blue)
-    {
-        Fill(red, green, blue);
-        Stroke(red, green, blue);
-        Ellipse(_radius, _radius, 2 * _radius, 2 * _radius);
     }
 
     public void Gravity()
@@ -71,14 +65,28 @@ class Player : EasyDraw
 
     void PlayerControl()
     {
-        if (Input.GetKey(Key.A)) { position -= new Vec2(speed * Time.deltaTime, 0); }
-        if (Input.GetKey(Key.D)) { position += new Vec2(speed * Time.deltaTime, 0); }
+        //if (Input.GetKey(Key.A)) { position -= new Vec2(speed * Time.deltaTime, 0); }
+        //if (Input.GetKey(Key.D)) { position += new Vec2(speed * Time.deltaTime, 0); }
 
-        if (!lightWeight) return;
-        if (canJump && Input.GetKeyDown(Key.SPACE)) {
-            velocity -= new Vec2(0, jumpSpeed);
-            canJump = false;
+        //if (!lightWeight) return;
+        //if (canJump && Input.GetKeyDown(Key.SPACE))
+        //{
+        //    velocity -= new Vec2(0, jumpSpeed);
+        //    canJump = false;
+        //}
+        Vec2 deltaVec = position - new Vec2(Input.mouseX, Input.mouseY);
+        if (velocity.Length() < 0.1f)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                Gizmos.DrawArrow(position.x, position.y, deltaVec.x, deltaVec.y, 0.08f);
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                velocity += deltaVec * .04f;
+            }
         }
+        if(Input.GetKey(Key.SPACE)) { stickToWall = !stickToWall; }
     }
 
     public void Land() { canJump = true; }
@@ -172,6 +180,22 @@ class Player : EasyDraw
                 }
             }
         }
+
+        foreach(Spike spike in myGame.spikes)
+        {
+            Vec2 difVec = position - spike.position;
+
+            float minDist = radius + spike.radius;
+
+            float dist = difVec.Length();
+
+            if (minDist + 10 > dist)
+            {
+                position.x = 150;
+                position.y = 700;
+                velocity = new Vec2(0,0);
+            }
+        }    
         
 
         if (FirstTOI < 1)
@@ -185,12 +209,16 @@ class Player : EasyDraw
     {
         latestCollision = col.other;
         MyGame myGame = (MyGame)game;
-        if (col.other is NLineSegment)
+        if (col.other is LineSegment)
         {
+            if (stickToWall)
+            {
+                acceleration = new Vec2(0,0);
+                velocity = new Vec2(0, 0);
+            }
             position -= (-difline + radius) * col.normal;
             velocity.Reflect(col.normal);
         }
     }
-
 }
 

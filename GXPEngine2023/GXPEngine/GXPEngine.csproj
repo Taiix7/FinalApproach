@@ -49,7 +49,9 @@
     <Compile Include="GXPEngine\Components\NLineSegment.cs" />
     <Compile Include="LevelLine.cs" />
     <Compile Include="Level.cs" />
+    <Compile Include="LevelLineVertical.cs" />
     <Compile Include="Lever.cs" />
+    <Compile Include="MovingWall.cs" />
     <Compile Include="MyGame.cs" />
     <Compile Include="GXPEngine\Core\Canvas.cs" />
     <Compile Include="GXPEngine\Game.cs" />
@@ -90,6 +92,7 @@
     <Compile Include="GXPEngine\SoLoud\SoloudSoundSystem.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="ResponsiveObject.cs" />
+    <Compile Include="Spike.cs" />
     <Compile Include="Vec2.cs" />
   </ItemGroup>
   <ItemGroup>

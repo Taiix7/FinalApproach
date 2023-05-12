@@ -17,9 +17,10 @@ namespace GXPEngine
             loader.rootObject = this;
             loader.autoInstance = true;
             loader.addColliders = false;
-            loader.LoadImageLayers();
-            loader.LoadObjectGroups();
             loader.LoadTileLayers();
+            loader.LoadObjectGroups();
+            player = FindObjectOfType<Player>();
+
 
         }
     }

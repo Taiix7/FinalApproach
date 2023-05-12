@@ -8,44 +8,32 @@ public class MyGame : Game
     public Vec2 deltaVec = new Vec2();
     public Vec2 empLines;
     public List<NLineSegment> list= new List<NLineSegment>();
+    public List<Spike> spikes = new List<Spike>();
 
-    string level = "Level1.tmx";
+    string level = "level2.tmx";
     string nextlevel = null;
     private Player player;
 
     private Lever lever;
+    private Level _level;
     private ResponsiveObject responsiveObject;
-    LevelLine line;
 
     public MyGame() : base(1920, 1080, false)     // Create a window that's 800x600 and NOT fullscreen
     {
-        //line = new LevelLine();
-        CreateLevel();
         OnAfterStep += CheckLoadLevel;
         LoadLevel(level);
-        //// Draw some things on a canvas:
-        //EasyDraw canvas = new EasyDraw(800, 600);
-        //canvas.Clear(Color.MediumPurple);
-        //canvas.Fill(Color.Yellow);
-        //canvas.Ellipse(width / 2, height / 2, 200, 200);
-        //canvas.Fill(50);
-        //canvas.TextSize(32);
-        //canvas.TextAlign(CenterMode.Center, CenterMode.Center);
-        //canvas.Text("Welcome!", width / 2, height / 2);
-
-        //// Add the canvas to the engine to display it:
-        //AddChild(canvas);
-        //Console.WriteLine("MyGame initialized");
+        CreateLevel();
     }
 
     private void CreateLevel()
     {
-        player = new Player(50, new Vec2(250, 250));
+        //player = new Player(20, new Vec2(150, 700));
 
         responsiveObject = new ResponsiveObject(30, new Vec2(10,10));
         lever = new Lever(30, new Vec2(400, 300), responsiveObject);
 
-        AddChild(player);
+
+        //AddChild(player);
         AddChild(responsiveObject);
         AddChild(lever);
     }
@@ -53,8 +41,8 @@ public class MyGame : Game
     // For every game object, Update is called every frame, by the engine:
     void Update()
     {
-        player.Step();
-        //Collisions(deltaVec,empLines,list,typeof(Player));
+        if (_level == null) return;
+        _level.player.Step();
         if (lever.IsMouseOver() && Input.GetMouseButtonDown(0))
         {
             lever.connectedObject.UpdateColor(152,242,0);
@@ -70,8 +58,10 @@ public class MyGame : Game
     {
         if (nextlevel != null)
         {
+            _level = new Level(nextlevel);
+
             //DestroyAll();
-            AddChild(new Level(nextlevel));
+            AddChild(_level);
             nextlevel = null;
         }
     }
