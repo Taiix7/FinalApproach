@@ -1,5 +1,4 @@
 ﻿using GXPEngine;
-using System;
 using TiledMapParser;
 
 class LevelLine : Sprite
@@ -9,7 +8,6 @@ class LevelLine : Sprite
     public LevelLine(TiledObject obj = null) : base("circle.png")
     {
         line = new NLineSegment(obj.X, obj.Y,obj.X + obj.Width, obj.Y, 0xffffffff, 3);
-        Console.WriteLine(obj.X);
         MyGame myGame = (MyGame)game;
         myGame.list.Add(line);
         myGame.AddChild(line);

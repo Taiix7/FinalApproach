@@ -7,7 +7,7 @@ public class MyGame : Game
 {
     public Vec2 deltaVec = new Vec2();
     public Vec2 empLines;
-    public List<NLineSegment> list= new List<NLineSegment>();
+    public List<NLineSegment> list = new List<NLineSegment>();
 
     string level = "Level1.tmx";
     string nextlevel = null;
@@ -16,6 +16,8 @@ public class MyGame : Game
     private Lever lever;
     private ResponsiveObject responsiveObject;
     LevelLine line;
+
+    Vent vent;
 
     public MyGame() : base(1920, 1080, false)     // Create a window that's 800x600 and NOT fullscreen
     {
@@ -40,12 +42,13 @@ public class MyGame : Game
 
     private void CreateLevel()
     {
-        player = new Player(50, new Vec2(250, 250));
-
-        responsiveObject = new ResponsiveObject(30, new Vec2(10,10));
+        player = new Player(50, new Vec2(250, 150));
+        //vent = new Vent(new Vec2(200, 300));
+        responsiveObject = new ResponsiveObject(30, new Vec2(10, 10));
         lever = new Lever(30, new Vec2(400, 300), responsiveObject);
-
+        NLineSegment liniq = new NLineSegment(new Vec2(500, 500), new Vec2(500,400), 0xffffffff, 3);
         AddChild(player);
+        AddChild(liniq);
         AddChild(responsiveObject);
         AddChild(lever);
     }
@@ -54,10 +57,15 @@ public class MyGame : Game
     void Update()
     {
         player.Step();
+
+        //if (vent.IsPlayerInRange(player)) {
+        //    Console.WriteLine("player in range");
+        //    vent.ApplyVentEffect(player);
+        //}
         //Collisions(deltaVec,empLines,list,typeof(Player));
         if (lever.IsMouseOver() && Input.GetMouseButtonDown(0))
         {
-            lever.connectedObject.UpdateColor(152,242,0);
+            lever.connectedObject.UpdateColor(152, 242, 0);
         }
     }
 
@@ -76,34 +84,10 @@ public class MyGame : Game
         }
     }
 
-    public void Collisions(Vec2 deltaVec, Vec2 line, List<NLineSegment> linesList, Type type)
-    {
-        if (type == typeof(Player))
-        {
-            foreach (NLineSegment lines in linesList)
-            {
-                deltaVec = lines.start - player.position;
-                line = lines.start - lines.end;
 
-                float ballDistance = deltaVec.Dot(line.Normal());
 
-                if (ballDistance - player.radius < 0)
-                {
 
-                    float a = ballDistance - player.radius;
-
-                    player.position -= Mathf.Abs(a) * line.Normal();
-
-                    player.velocity.Reflect(line.Normal(), 0.8f);
-                    player.velocity *= .89f;
-                }
-                player.UpdateScreenPosition();
-
-            }
-        }
-    }
-
-        static void Main()                          // Main() is the first method that's called when the program is run
+    static void Main()                          // Main() is the first method that's called when the program is run
     {
         new MyGame().Start();                   // Create a "MyGame" and start it
     }
