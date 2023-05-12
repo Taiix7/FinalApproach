@@ -5,7 +5,6 @@ public class Lever : EasyDraw
     public int radius { get { return _radius; } }
     public Vec2 position;
     public ResponsiveObject connectedObject;
-    
     private int _radius;
 
     public Lever(int pRadius, Vec2 pPosition, ResponsiveObject connectedObject) : base(pRadius * 2 + 1, pRadius * 2 + 1)
