@@ -1,4 +1,4 @@
-﻿using GXPEngine;
+using GXPEngine;
 
 public class Lever : EasyDraw
 {

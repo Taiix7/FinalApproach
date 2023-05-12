@@ -1,0 +1,16 @@
+﻿using GXPEngine;
+using System;
+using TiledMapParser;
+
+class LevelLineVertical : Sprite
+{
+    NLineSegment lineVertical;
+
+    public LevelLineVertical(TiledObject obj = null) : base("circle.png")
+    {
+        lineVertical = new NLineSegment(obj.X + obj.Width, obj.Y, obj.X + obj.Width, obj.Y + obj.Height, 0xffffffff, 3);
+        MyGame myGame = (MyGame)game;
+        myGame.list.Add(lineVertical);
+        myGame.AddChild(lineVertical);
+    }
+}
