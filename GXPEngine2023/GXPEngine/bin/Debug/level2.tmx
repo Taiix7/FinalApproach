@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="16" nextobjectid="161">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="16" nextobjectid="162">
  <tileset firstgid="1" name="buildingblocks" tilewidth="32" tileheight="32" tilecount="24" columns="4">
   <image source="buildingblocks.png" width="128" height="192"/>
  </tileset>
@@ -142,7 +142,9 @@
  <objectgroup id="14" name="MovingWall">
   <object id="149" name="MovingWall" type="MovingWall" x="928" y="544" width="32" height="160"/>
  </objectgroup>
- <objectgroup id="15" name="Lever"/>
+ <objectgroup id="15" name="Lever">
+  <object id="161" name="Lever" type="Lever" x="1312" y="672" width="64" height="64"/>
+ </objectgroup>
  <objectgroup id="5" name="LevelLineVertical">
   <object id="70" name="LevelLineVertical" type="LevelLineVertical" x="160" y="1088" width="30" height="-252"/>
   <object id="73" name="LevelLineVertical" type="LevelLineVertical" x="480" y="832" width="-30" height="252"/>
