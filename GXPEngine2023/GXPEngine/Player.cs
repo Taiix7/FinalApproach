@@ -1,4 +1,6 @@
 ﻿using GXPEngine;
+using System;
+using System.Linq.Expressions;
 
 class Player : EasyDraw
 {
@@ -14,7 +16,7 @@ class Player : EasyDraw
     public GameObject latestCollision = null;
 
     private float speed = 1f;
-    private float weight = .01f;
+    public float mass = .01f;
     private float jumpSpeed = 5;
 
     public Vec2 velocity;
@@ -55,7 +57,7 @@ class Player : EasyDraw
     void PlayerPhysics()
     {
         Gravity();
-        acceleration = new Vec2(0, weight);
+        acceleration = new Vec2(0, mass);
     }
 
     public void Step()
@@ -145,7 +147,7 @@ class Player : EasyDraw
 
 
         // Check other movers:
-        foreach (LineSegment lines in myGame.list)
+        foreach (NLineSegment lines in myGame.list)
         {
 
             Vec2 point = lines.start;
@@ -172,7 +174,7 @@ class Player : EasyDraw
                 }
             }
         }
-        
+
 
         if (FirstTOI < 1)
         {
@@ -184,13 +186,17 @@ class Player : EasyDraw
     void ResolveCollision(CollisionInfo col)
     {
         latestCollision = col.other;
-        MyGame myGame = (MyGame)game;
         if (col.other is NLineSegment)
         {
+            Console.Write("detect");
             position -= (-difline + radius) * col.normal;
             velocity.Reflect(col.normal);
         }
     }
 
+    public void ApplyForce(Vec2 force) {
+        acceleration.x += force.x / mass;
+        acceleration.y += force.y / mass;
+    }
 }
 
