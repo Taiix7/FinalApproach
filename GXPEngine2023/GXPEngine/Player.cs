@@ -16,15 +16,15 @@ class Player : Sprite
     public GameObject latestCollision = null;
 
     private float speed = 1f;
-    private float weight = .1f;
+    public float mass = .1f;
     private float jumpSpeed = 5;
 
     public Vec2 velocity;
     private Vec2 acceleration;
     private Vec2 _oldPosition;
 
-    private bool canJump;
     private bool stickToWall;
+    private bool moving;
 
     public Player(TiledObject obj = null) : base("Slime_Luca.png")
     {
@@ -48,8 +48,10 @@ class Player : Sprite
 
     void PlayerPhysics()
     {
+        
         Gravity();
-        acceleration = new Vec2(0, weight);
+        if (stickToWall && !moving) return;
+        acceleration = new Vec2(0, mass);
     }
 
     public void Step()
@@ -65,31 +67,23 @@ class Player : Sprite
 
     void PlayerControl()
     {
-        //if (Input.GetKey(Key.A)) { position -= new Vec2(speed * Time.deltaTime, 0); }
-        //if (Input.GetKey(Key.D)) { position += new Vec2(speed * Time.deltaTime, 0); }
-
-        //if (!lightWeight) return;
-        //if (canJump && Input.GetKeyDown(Key.SPACE))
-        //{
-        //    velocity -= new Vec2(0, jumpSpeed);
-        //    canJump = false;
-        //}
         Vec2 deltaVec = position - new Vec2(Input.mouseX, Input.mouseY);
         if (velocity.Length() < 0.1f)
         {
             if (Input.GetMouseButton(0))
             {
+                moving = false;
                 Gizmos.DrawArrow(position.x, position.y, deltaVec.x, deltaVec.y, 0.08f);
             }
             else if (Input.GetMouseButtonUp(0))
             {
                 velocity += deltaVec * .04f;
+                moving = true;
             }
         }
         if(Input.GetKey(Key.SPACE)) { stickToWall = !stickToWall; }
     }
 
-    public void Land() { canJump = true; }
 
     public float TOIBallLine(Player move, LineSegment line, Vec2 difference, bool top)
     {

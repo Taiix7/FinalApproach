@@ -9,6 +9,7 @@ public class MovingWall : Sprite
     public int radius = 10;
     public Vec2 position;
     public bool moveDown = true;
+    NLineSegment moveLine;
     public MovingWall(TiledObject obj = null) : base("circle.png")
     {
         position.x = obj.X;
@@ -16,6 +17,9 @@ public class MovingWall : Sprite
         x = position.x;
         y = position.y;
         SetOrigin(radius, radius);
+        moveLine = new NLineSegment(obj.X + obj.Width, obj.Y, obj.X + obj.Width, obj.Y + obj.Height, 0xffffffff, 3);
+        MyGame myGame = (MyGame)game;
+        myGame.list.Add(moveLine);
     }
 
     public void Update()
@@ -38,6 +42,7 @@ public class MovingWall : Sprite
             moveDown = true;
             y += speed * Time.deltaTime;
         }
+        moveLine.SetXY(position.x, position.y);
         //if(position.y > 800)
         //{
         //    position.y -= speed;

@@ -34,7 +34,7 @@ class Vent : Sprite
             float floatForceMagnitude = floatForce * (1f - (float)Math.Abs(player.position.y - position.y) / ventWidth);
             Vec2 floatForceVector = new Vec2(0, -floatForceMagnitude) * player.mass;
 
-            player.ApplyForce(floatForceVector);
+            //player.ApplyForce(floatForceVector);
         }
 
     }
