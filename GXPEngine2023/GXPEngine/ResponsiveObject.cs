@@ -18,7 +18,7 @@ public class ResponsiveObject : EasyDraw
         Draw(255, 255, 255);
     }
 
-    void Draw(byte red, byte green, byte blue)
+    public void Draw(byte red, byte green, byte blue)
     {
         Fill(red, green, blue);
         Stroke(red, green, blue);

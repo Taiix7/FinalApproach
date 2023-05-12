@@ -42,14 +42,8 @@ public class MovingWall : Sprite
             moveDown = true;
             y += speed * Time.deltaTime;
         }
-        moveLine.SetXY(position.x, position.y);
-        //if(position.y > 800)
-        //{
-        //    position.y -= speed;
-        //}
-        //if(position.y < 200)
-        //{
-        //    position.y += speed;
-        //}
+
+        moveLine.x = position.x;
+        moveLine.y = position.y;
     }
 }
