@@ -143,9 +143,7 @@
   <object id="146" name="LevelLineVertical" type="LevelLineVertical" x="1280" y="736" width="-30" height="384"/>
   <object id="148" name="LevelLine" type="LevelLine" x="1728" y="512" width="-256" height="32"/>
  </objectgroup>
- <objectgroup id="14" name="MovingWall">
-  <object id="149" name="MovingWall" type="MovingWall" x="928" y="544" width="32" height="160"/>
- </objectgroup>
+ <objectgroup id="14" name="MovingWall"/>
  <objectgroup id="15" name="Lever">
   <object id="161" name="Lever" type="Lever" x="491.863" y="761.499" width="64" height="64">
    <properties>
