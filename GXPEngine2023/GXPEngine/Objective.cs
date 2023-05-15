@@ -1,12 +1,12 @@
 ﻿using GXPEngine;
 using TiledMapParser;
 
-public class Spike : Sprite
-{
-    public int radius = 10;
-    public Vec2 position;
 
-    public Spike(TiledObject obj = null) : base("torns-mid-2.png")
+public class Objective : Sprite
+{
+    public int radius = 20;
+    public Vec2 position;
+    public Objective(TiledObject obj = null) : base("End_Idle.png")
     {
         position.x = obj.X;
         position.y = obj.Y;
@@ -14,6 +14,6 @@ public class Spike : Sprite
         y = position.y;
         SetOrigin(radius, radius);
         MyGame myGame = (MyGame)game;
-        myGame.spikes.Add(this);
+        myGame.objectives.Add(this);
     }
 }
