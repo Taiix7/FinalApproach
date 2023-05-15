@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="94">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="95">
  <tileset firstgid="1" name="building blocks 1" tilewidth="32" tileheight="32" tilecount="294" columns="21">
   <image source="Building_blocks.png" width="672" height="448"/>
  </tileset>
@@ -97,11 +97,12 @@
   <object id="37" name="LevelLineVertical" type="LevelLineVertical" x="512" y="1088" width="32" height="-224"/>
   <object id="38" name="LevelLineVertical" type="LevelLineVertical" x="1888" y="448" width="32" height="252.667"/>
   <object id="39" name="LevelLineVertical" type="LevelLineVertical" x="0" y="864" width="32" height="-862.67"/>
-  <object id="40" name="LevelLine" type="LevelLine" x="31.3333" y="0.16665" width="1026.67" height="31.6667"/>
+  <object id="40" name="LevelLine" type="LevelLine" x="31.3333" y="0.16665" width="1885.83" height="31.6667"/>
   <object id="48" name="LevelLineVertical" type="LevelLineVertical" x="1474" y="699.667" width="32" height="388.333"/>
   <object id="49" name="LevelLine" type="LevelLine" x="1216" y="416" width="704" height="31.333"/>
   <object id="50" name="LevelLineVertical" type="LevelLineVertical" x="1184" y="640" width="32" height="-512"/>
   <object id="51" name="LevelLineVertical" type="LevelLineVertical" x="1056" y="224" width="32" height="-224"/>
+  <object id="94" name="LevelLineVertical" type="LevelLineVertical" x="1888" y="0" width="32" height="384"/>
  </objectgroup>
  <objectgroup id="10" name="Vent"/>
  <objectgroup id="9" name="Lever">

@@ -63,6 +63,9 @@ public class Lever : AnimationSprite
         }
         connectedObject = new Vent(new Vec2(floatValueX, floatValueY), force);
         if (force == 0.5f)
-            connectedObject.SetScaleXY(connectedObject.scaleX,connectedObject.scaleY * -1);
+            connectedObject.SetScaleXY(connectedObject.scaleX, connectedObject.scaleY * -1);
+        else {
+            connectedObject.SetScaleXY(connectedObject.scaleX, connectedObject.scaleY);
+        }
     }
 }
