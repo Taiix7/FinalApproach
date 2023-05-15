@@ -22,16 +22,24 @@ public class Player : Sprite
     public Vec2 acceleration;
     public Vec2 _oldPosition;
 
-    private bool stickToWall;
+    private bool stickToWall = false;
     private bool moving;
+    private bool inTheAir;
 
+    private float tt = 0;
+
+    private Sound hitGround;
+    private bool canPlay = true;
 
     public Player(TiledObject obj = null) : base("Slime_Luca.png")
     {
+
         position.x = obj.X;
         position.y = obj.Y;
         //UpdateScreenPosition();
         SetOrigin(_radius, _radius);
+
+        hitGround = new Sound("slime_hit.wav");
     }
 
     public void Gravity()
@@ -49,16 +57,17 @@ public class Player : Sprite
     void PlayerPhysics()
     {
         Gravity();
-        if (stickToWall && !moving && velocity.Length() < 0.1f) return;
-        acceleration = new Vec2(0, mass);
+        if (!stickToWall || (stickToWall && moving) || velocity.Length() >= 0.1f)
+        {
+            acceleration = new Vec2(0, mass);
+        }
     }
 
     public void Step()
     {
-        PlayerPhysics();
         PlayerControl();
+        PlayerPhysics();
         CheckCollision();
-
         velocity *= 0.99f;
         _oldPosition = position;
         UpdateScreenPosition();
@@ -66,8 +75,19 @@ public class Player : Sprite
 
     void PlayerControl()
     {
+        if (stickToWall && !inTheAir)
+        {
+            tt += 2f / 100f;
+            if (tt >= 4)
+            {
+                tt = 0f;
+                stickToWall = false;
+            }
+        }
+        Console.WriteLine(tt);
+
         Vec2 deltaVec = position - new Vec2(Input.mouseX, Input.mouseY);
-        
+
         if (Input.GetMouseButton(0))
         {
             moving = false;
@@ -77,9 +97,10 @@ public class Player : Sprite
         {
             velocity += deltaVec * .05f;
             moving = true;
+            stickToWall = true; 
+            canPlay = true;
+            inTheAir = true;
         }
-
-        if (Input.GetKeyDown(Key.SPACE)) { stickToWall = !stickToWall; }
     }
 
 
@@ -143,11 +164,9 @@ public class Player : Sprite
         Vec2 firstnormal = new Vec2(0, 1);
         float FirstTOI = 2;
 
-
         // Check other movers:
         foreach (LineSegment lines in myGame.list)
         {
-
             Vec2 point = lines.start;
             Vec2 line = lines.start - lines.end;
 
@@ -168,7 +187,6 @@ public class Player : Sprite
                     otherCol = lines;
                     FirstTOI = t;
                     difline = ballDistance;
-
                 }
             }
         }
@@ -231,6 +249,12 @@ public class Player : Sprite
         MyGame myGame = (MyGame)game;
         if (col.other is LineSegment)
         {
+            inTheAir = false;
+            
+            if (canPlay)
+                hitGround.Play();
+            canPlay = false;
+
             if (stickToWall)
             {
                 moving = false;
