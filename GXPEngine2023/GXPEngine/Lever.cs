@@ -40,6 +40,7 @@ public class Lever : AnimationSprite
     {
         float floatValueX = 0;
         float floatValueY = 0;
+        float rotation = 0;
         foreach (Property property in obj.propertyList.properties)
         {
             if (property.Name == "connectedX")

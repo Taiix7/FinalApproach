@@ -12,13 +12,14 @@ public class MyGame : Game
     public List<Spike> spikes = new List<Spike>();
     public List<Lever> levers = new List<Lever>();
     public List<Vent> vents = new List<Vent>();
+    public List<Objective> objectives = new List<Objective>();
 
-    string level = "level2.tmx";
+    string level = "level_1.tmx";
     string nextlevel = null;
 
     private Level _level;
 
-    public MyGame() : base(1920, 1080, false)     // Create a window that's 800x600 and NOT fullscreen
+    public MyGame() : base(1920, 1080, false, true, 5760, 3240, true)     // Create a window that's 800x600 and NOT fullscreen
     {
         OnAfterStep += CheckLoadLevel;
         LoadLevel(level);
