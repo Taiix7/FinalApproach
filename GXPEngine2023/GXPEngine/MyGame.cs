@@ -22,23 +22,8 @@ public class MyGame : Game
     {
         OnAfterStep += CheckLoadLevel;
         LoadLevel(level);
-        CreateLevel();
     }
 
-    private void CreateLevel()
-    {
-        ////player = new Player(20, new Vec2(150, 700));
-
-        //responsiveObject = new ResponsiveObject(30, new Vec2(10, 10));
-        ////lever = new Lever(30, new Vec2(400, 300), responsiveObject);
-
-
-        ////AddChild(player);
-        //AddChild(responsiveObject);
-        ////AddChild(lever);
-    }
-
-    // For every game object, Update is called every frame, by the engine:
     void Update()
     {
         if (_level == null) return;
@@ -50,10 +35,6 @@ public class MyGame : Game
                 vent.ApplyVentEffect(_level.player);
             }
         }
-        //if (lever.IsMouseOver() && Input.GetMouseButtonDown(0))
-        //{
-        //    lever.connectedObject.UpdateColor(152,242,0);
-        //}
     }
 
     public void LoadLevel(string levelName)

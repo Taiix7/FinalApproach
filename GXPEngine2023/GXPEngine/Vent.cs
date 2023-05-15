@@ -1,23 +1,19 @@
 ﻿using GXPEngine;
 using System;
-using System.Threading;
-using TiledMapParser;
 
-public class Vent : Sprite
+public class Vent : AnimationSprite
 {
     public bool isActive = true;
     public Vec2 position;
 
-    private float detectionRangeY = 200f;
+    private float detectionRangeY = 500f;
     private float ventWidth = 100f;
-    private float floatForce = 50f;
-    private float floatFrequency = 2f;
-    private float floatAmplitude = 10f;
-    
-    public Vent(TiledObject obj = null) : base("circle.png")
+    private float forcePower = -0.5f;
+
+    public Vent(Vec2 _position) : base("flower-vent.png", 4,1)
     {
-        position.x = obj.X;
-        position.y = obj.Y;
+        position.x = _position.x;
+        position.y = _position.y;
 
         MyGame myGame = (MyGame)game;
 
@@ -26,22 +22,20 @@ public class Vent : Sprite
         y = position.y;
     }
 
+    void Update() {
+        if (!isActive) return;
+        Animate(0.1f);
+    }
+
     public void ApplyVentEffect(Player player)
     {
         float distanceY = Math.Abs(player.position.y - position.y);
         float distanceX = Math.Abs(player.position.x - position.x);
 
-        if (isActive && distanceY <= ventWidth && distanceX <= ventWidth)
+        if (isActive && distanceY <= detectionRangeY && distanceX <= ventWidth)
         {
-            //float floatOffset = (float)Math.Sin(Time.time * floatFrequency) * floatAmplitude;
-            //float floatForceMagnitude = floatForce * (1f - (float)Math.Abs(player.position.y - position.y) / ventWidth);
-            //Vec2 floatForceVector = new Vec2(0, -floatForceMagnitude * floatOffset * player.mass);
-
-            //player.position = new Vec2((float)Math.Sin(player.position.x, 0), 0);
-            //player.position += player.x * Mathf.Sin(Time.time * 3f + 1f) * 1f;
+            player.acceleration += new Vec2(0, forcePower);
         }
-    
-
     }
 
     public bool IsPlayerInRange(Player player)
@@ -50,4 +44,3 @@ public class Vent : Sprite
         return distanceY <= detectionRangeY;
     }
 }
-
