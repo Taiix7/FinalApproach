@@ -20,7 +20,7 @@ public class Lever : AnimationSprite
         SetOrigin(radius, radius);
         MyGame myGame = (MyGame)game;
         myGame.levers.Add(this);
-
+        
         CreateResponsiveObject();
         myGame.LateAddChild(connectedObject);
     }
@@ -31,6 +31,11 @@ public class Lever : AnimationSprite
     /// 
     /// connectedX
     /// connectedY
+    /// force
+    /// 
+    /// if you want to be reversed, 
+    /// force = 0.5 (going down)
+    /// force = -0.5 (going up)                            
     /// 
     /// And put the coordinated you want for the object that will response when the lever is detected object
     /// 
@@ -40,6 +45,8 @@ public class Lever : AnimationSprite
     {
         float floatValueX = 0;
         float floatValueY = 0;
+        float force = 0;
+
         foreach (Property property in obj.propertyList.properties)
         {
             if (property.Name == "connectedX")
@@ -50,8 +57,11 @@ public class Lever : AnimationSprite
             {
                 floatValueY = float.Parse(property.Value);
             }
+            else if (property.Name == "force") { 
+                force = float.Parse(property.Value);
+            }
         }
-        connectedObject = new Vent(new Vec2(floatValueX, floatValueY));
+        connectedObject = new Vent(new Vec2(floatValueX, floatValueY), force);
     }
 
     public bool IsMouseOver()

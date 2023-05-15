@@ -1,4 +1,5 @@
 using GXPEngine;
+using System;
 using TiledMapParser;
 
 public class Player : Sprite
@@ -24,6 +25,7 @@ public class Player : Sprite
     private bool stickToWall;
     private bool moving;
 
+    
     public Player(TiledObject obj = null) : base("Slime_Luca.png")
     {
         position.x = obj.X;
@@ -57,11 +59,10 @@ public class Player : Sprite
         PlayerControl();
         CheckCollision();
 
+
         velocity *= 0.99f;
         _oldPosition = position;
         UpdateScreenPosition();
-
-
     }
 
     void PlayerControl()
@@ -80,7 +81,7 @@ public class Player : Sprite
             moving = true;
         }
         // }
-        if (Input.GetKey(Key.SPACE)) { stickToWall = !stickToWall; }
+        if (Input.GetKeyDown(Key.SPACE)) { stickToWall = !stickToWall; }
     }
 
 

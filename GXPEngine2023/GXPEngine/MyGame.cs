@@ -2,6 +2,7 @@ using System;                                   // System contains a lot of defa
 using GXPEngine;                                // GXPEngine contains the engine
 using System.Drawing;                           // System.Drawing contains drawing tools such as Color definitions
 using System.Collections.Generic;
+using System.Threading;
 
 public class MyGame : Game
 {
@@ -18,6 +19,8 @@ public class MyGame : Game
 
     private Level _level;
 
+    private float time;
+
     public MyGame() : base(1920, 1080, false)     // Create a window that's 800x600 and NOT fullscreen
     {
         OnAfterStep += CheckLoadLevel;
@@ -26,10 +29,14 @@ public class MyGame : Game
 
     void Update()
     {
+        if (Input.GetKeyDown(Key.P))
+            LoadLevel("Level1.tmx");
+
         if (_level == null) return;
         _level.player.Step();
-
-        foreach (Vent vent in vents)
+        Timer();
+        
+            foreach (Vent vent in vents)
         {
             if (vent.IsPlayerInRange(_level.player)) {
                 vent.ApplyVentEffect(_level.player);
@@ -42,16 +49,33 @@ public class MyGame : Game
         nextlevel = levelName;
     }
 
+    void DestroyLevel()
+    {
+        List<GameObject> children = GetChildren();
+        foreach (GameObject child in children)
+        {
+            child.Destroy();
+        }
+    }
+
     void CheckLoadLevel()
     {
         if (nextlevel != null)
         {
+            DestroyLevel();
             _level = new Level(nextlevel);
-
-            //DestroyAll();
             AddChild(_level);
             nextlevel = null;
         }
+    }
+
+    void Timer() {
+
+        time = Time.time / 1000;
+        int min = (int)Math.Floor(time / 60);
+        int sec = (int)Math.Floor(time % 60);
+
+        Console.WriteLine(string.Format("{0:00}:{1:00}", min, sec));
     }
 
 

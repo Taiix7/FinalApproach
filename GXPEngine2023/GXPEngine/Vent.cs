@@ -10,10 +10,11 @@ public class Vent : AnimationSprite
     private float ventWidth = 100f;
     private float forcePower = -0.5f;
 
-    public Vent(Vec2 _position) : base("flower-vent.png", 4,1)
+    public Vent(Vec2 _position, float forcePower) : base("flower-vent.png", 4,1)
     {
         position.x = _position.x;
         position.y = _position.y;
+        this.forcePower = forcePower;
 
         MyGame myGame = (MyGame)game;
 
