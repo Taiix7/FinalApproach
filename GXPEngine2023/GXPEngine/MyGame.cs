@@ -2,6 +2,7 @@ using System;                                   // System contains a lot of defa
 using GXPEngine;                                // GXPEngine contains the engine
 using System.Collections.Generic;
 using System.Threading;
+using TiledMapParser;
 
 public class MyGame : Game
 {
@@ -107,8 +108,6 @@ public class MyGame : Game
         time = Time.time / 1000;
         int min = (int)Math.Floor(time / 60);
         int sec = (int)Math.Floor(time % 60);
-
-        //Console.WriteLine(string.Format("{0:00}:{1:00}", min, sec));
     }
 
 

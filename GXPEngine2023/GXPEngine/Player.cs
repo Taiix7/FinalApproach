@@ -23,10 +23,11 @@ public class Player : AnimationSprite
     public Vec2 acceleration;
     public Vec2 _oldPosition;
 
-    public bool stickToWall;
+    private bool stickToWall = false;
     private bool moving;
     private bool inTheAir;
     public bool ceilling;
+    private bool inTheAir;
 
     private float tt = 0;
     Sprite sticky;
@@ -106,6 +107,16 @@ public class Player : AnimationSprite
         StickyTimer();
 
         if (Input.GetKeyDown(Key.SPACE)) stickToWall = !stickToWall;
+
+        if (stickToWall && !inTheAir)
+        {
+            tt += 2f / 100f;
+            if (tt >= 4)
+            {
+                tt = 0f;
+                stickToWall = false;
+            }
+        }
 
         Vec2 deltaVec = position - new Vec2(Input.mouseX, Input.mouseY);
 
