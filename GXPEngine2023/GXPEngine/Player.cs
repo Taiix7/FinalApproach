@@ -47,9 +47,9 @@ public class Player : Sprite
     }
 
     void PlayerPhysics()
-    {
+    { 
         Gravity();
-        if (stickToWall && !moving) return;
+        if (stickToWall && !moving && velocity.Length() < 0.1f) return;
         acceleration = new Vec2(0, mass);
     }
 
@@ -58,8 +58,7 @@ public class Player : Sprite
         PlayerPhysics();
         PlayerControl();
         CheckCollision();
-
-
+        
         velocity *= 0.99f;
         _oldPosition = position;
         UpdateScreenPosition();
@@ -205,6 +204,20 @@ public class Player : Sprite
             }
         }
 
+        foreach (Objective objective in myGame.objectives)
+        {
+            Vec2 difVec = position - objective.position;
+
+            float minDist = radius + objective.radius;
+
+            float dist = difVec.Length();
+
+            if (minDist + 10 > dist)
+            {
+                myGame.LoadLevel("level2.tmx");
+            }
+        }
+
 
         if (FirstTOI < 1)
         {
@@ -221,6 +234,7 @@ public class Player : Sprite
         {
             if (stickToWall)
             {
+                moving = false;
                 acceleration = new Vec2(0, 0);
                 velocity = new Vec2(0, 0);
             }

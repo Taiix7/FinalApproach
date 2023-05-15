@@ -13,8 +13,9 @@ public class MyGame : Game
     public List<Spike> spikes = new List<Spike>();
     public List<Lever> levers = new List<Lever>();
     public List<Vent> vents = new List<Vent>();
+    public List<Objective> objectives = new List<Objective>();
 
-    string level = "level2.tmx";
+    string level = "level_1.tmx";
     string nextlevel = null;
 
     private Level _level;
