@@ -1,7 +1,5 @@
 ﻿using GXPEngine;
-using System;
 using TiledMapParser;
-
 
 public class Spike : Sprite
 {

@@ -1,5 +1,4 @@
 ﻿using GXPEngine;
-using System;
 using TiledMapParser;
 
 
@@ -10,7 +9,7 @@ public class MovingWall : Sprite
     public Vec2 position;
     public bool moveDown = true;
     NLineSegment moveLine;
-    public MovingWall(TiledObject obj = null) : base("circle.png")
+    public MovingWall(TiledObject obj = null) : base("Empty.png")
     {
         position.x = obj.X;
         position.y = obj.Y;

@@ -1,15 +1,12 @@
 using GXPEngine;
-using System;
-using System.Linq;
 using TiledMapParser;
 
 public class Lever : AnimationSprite
 {
     public Vec2 position;
-    public ResponsiveObject connectedObject;
+    public Vent connectedObject;
 
-
-    public int radius = 10;
+    public int radius = 20;
 
     public TiledObject obj;
 
@@ -54,7 +51,7 @@ public class Lever : AnimationSprite
                 floatValueY = float.Parse(property.Value);
             }
         }
-        connectedObject = new ResponsiveObject(20, new Vec2(floatValueX, floatValueY));
+        connectedObject = new Vent(new Vec2(floatValueX, floatValueY));
     }
 
     public bool IsMouseOver()

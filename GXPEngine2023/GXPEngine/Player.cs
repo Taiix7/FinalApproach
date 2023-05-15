@@ -1,6 +1,4 @@
 using GXPEngine;
-using System;
-using System.Linq;
 using TiledMapParser;
 
 public class Player : Sprite
@@ -20,8 +18,8 @@ public class Player : Sprite
 
     public Vec2 velocity;
 
-    private Vec2 acceleration;
-    private Vec2 _oldPosition;
+    public Vec2 acceleration;
+    public Vec2 _oldPosition;
 
     private bool stickToWall;
     private bool moving;
@@ -62,26 +60,27 @@ public class Player : Sprite
         velocity *= 0.99f;
         _oldPosition = position;
         UpdateScreenPosition();
-        acceleration += new Vec2(0, -0.1f);
+
+
     }
 
     void PlayerControl()
     {
         Vec2 deltaVec = position - new Vec2(Input.mouseX, Input.mouseY);
-        if (velocity.Length() < 0.1f)
+        //if (velocity.Length() < 0.1f)
+        //{
+        if (Input.GetMouseButton(0))
         {
-            if (Input.GetMouseButton(0))
-            {
-                moving = false;
-                Gizmos.DrawArrow(position.x, position.y, deltaVec.x, deltaVec.y, 0.08f);
-            }
-            else if (Input.GetMouseButtonUp(0))
-            {
-                velocity += deltaVec * .04f;
-                moving = true;
-            }
+            moving = false;
+            Gizmos.DrawArrow(position.x, position.y, deltaVec.x, deltaVec.y, 0.08f);
         }
-        if(Input.GetKey(Key.SPACE)) { stickToWall = !stickToWall; }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            velocity += deltaVec * .02f;
+            moving = true;
+        }
+        // }
+        if (Input.GetKey(Key.SPACE)) { stickToWall = !stickToWall; }
     }
 
 
@@ -175,7 +174,7 @@ public class Player : Sprite
             }
         }
 
-        foreach(Spike spike in myGame.spikes)
+        foreach (Spike spike in myGame.spikes)
         {
             Vec2 difVec = position - spike.position;
 
@@ -187,11 +186,11 @@ public class Player : Sprite
             {
                 position.x = 150;
                 position.y = 700;
-                velocity = new Vec2(0,0);
+                velocity = new Vec2(0, 0);
             }
-        }  
-        
-        foreach(Lever lever in myGame.levers)
+        }
+
+        foreach (Lever lever in myGame.levers)
         {
             Vec2 difVec = position - lever.position;
 
@@ -201,12 +200,10 @@ public class Player : Sprite
 
             if (minDist + 10 > dist)
             {
-                lever.Animate(0.1f);
-                lever.connectedObject.Destroy();
-                
+                lever.connectedObject.isActive = false;
             }
-        }    
-        
+        }
+
 
         if (FirstTOI < 1)
         {
@@ -223,7 +220,7 @@ public class Player : Sprite
         {
             if (stickToWall)
             {
-                acceleration = new Vec2(0,0);
+                acceleration = new Vec2(0, 0);
                 velocity = new Vec2(0, 0);
             }
             position -= (-difline + radius) * col.normal;
@@ -231,7 +228,8 @@ public class Player : Sprite
         }
     }
 
-    public void ApplyForce(Vec2 force) {
+    public void ApplyForce(Vec2 force)
+    {
         acceleration.x -= force.x / mass;
         acceleration.y -= force.y / mass;
     }
