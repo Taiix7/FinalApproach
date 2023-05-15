@@ -30,7 +30,7 @@ public class Player : Sprite
 
     private Sound hitGround;
     private bool canPlay = true;
-
+    private bool clickedPlayer;
     public Player(TiledObject obj = null) : base("Slime_Luca.png")
     {
 
@@ -84,23 +84,29 @@ public class Player : Sprite
                 stickToWall = false;
             }
         }
-        Console.WriteLine(tt);
 
         Vec2 deltaVec = position - new Vec2(Input.mouseX, Input.mouseY);
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && IsMouseOver() && !inTheAir)
         {
             moving = false;
-            Gizmos.DrawArrow(position.x, position.y, deltaVec.x, deltaVec.y, 0.08f);
+            clickedPlayer = true;
         }
-        else if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0) && clickedPlayer)
         {
             velocity += deltaVec * .05f;
             moving = true;
-            stickToWall = true; 
+            stickToWall = true;
             canPlay = true;
             inTheAir = true;
+
+            clickedPlayer = false;
         }
+
+        if (clickedPlayer)
+            Gizmos.DrawArrow(position.x, position.y, deltaVec.x, deltaVec.y, 0.08f);
+
+        Console.WriteLine(clickedPlayer);
     }
 
 
@@ -250,7 +256,7 @@ public class Player : Sprite
         if (col.other is LineSegment)
         {
             inTheAir = false;
-            
+
             if (canPlay)
                 hitGround.Play();
             canPlay = false;
