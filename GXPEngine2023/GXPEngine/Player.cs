@@ -25,7 +25,7 @@ public class Player : Sprite
     private bool stickToWall;
     private bool moving;
 
-    
+
     public Player(TiledObject obj = null) : base("Slime_Luca.png")
     {
         position.x = obj.X;
@@ -47,7 +47,7 @@ public class Player : Sprite
     }
 
     void PlayerPhysics()
-    { 
+    {
         Gravity();
         if (stickToWall && !moving && velocity.Length() < 0.1f) return;
         acceleration = new Vec2(0, mass);
@@ -58,7 +58,7 @@ public class Player : Sprite
         PlayerPhysics();
         PlayerControl();
         CheckCollision();
-        
+
         velocity *= 0.99f;
         _oldPosition = position;
         UpdateScreenPosition();
@@ -67,8 +67,7 @@ public class Player : Sprite
     void PlayerControl()
     {
         Vec2 deltaVec = position - new Vec2(Input.mouseX, Input.mouseY);
-        //if (velocity.Length() < 0.1f)
-        //{
+        
         if (Input.GetMouseButton(0))
         {
             moving = false;
@@ -76,10 +75,10 @@ public class Player : Sprite
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            velocity += deltaVec * .02f;
+            velocity += deltaVec * .05f;
             moving = true;
         }
-        // }
+
         if (Input.GetKeyDown(Key.SPACE)) { stickToWall = !stickToWall; }
     }
 
@@ -247,6 +246,12 @@ public class Player : Sprite
     {
         acceleration.x -= force.x / mass;
         acceleration.y -= force.y / mass;
+    }
+
+    public bool IsMouseOver()
+    {
+        float distance = Mathf.Sqrt(Mathf.Pow(Input.mouseX - position.x, 2) + Mathf.Pow(Input.mouseY - position.y, 2));
+        return distance <= radius + 5;
     }
 }
 

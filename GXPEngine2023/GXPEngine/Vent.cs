@@ -7,7 +7,7 @@ public class Vent : AnimationSprite
     public Vec2 position;
 
     private float detectionRangeY = 500f;
-    private float ventWidth = 100f;
+    private float ventWidth = 50f;
     private float forcePower = -0.5f;
 
     public Vent(Vec2 _position, float forcePower) : base("flower-vent.png", 4,1)

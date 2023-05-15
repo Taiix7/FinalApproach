@@ -62,11 +62,7 @@ public class Lever : AnimationSprite
             }
         }
         connectedObject = new Vent(new Vec2(floatValueX, floatValueY), force);
-    }
-
-    public bool IsMouseOver()
-    {
-        float distance = Mathf.Sqrt(Mathf.Pow(Input.mouseX - position.x, 2) + Mathf.Pow(Input.mouseY - position.y, 2));
-        return distance <= radius;
+        if (force == 0.5f)
+            connectedObject.SetScaleXY(connectedObject.scaleX,connectedObject.scaleY * -1);
     }
 }
