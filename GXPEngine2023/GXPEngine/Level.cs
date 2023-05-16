@@ -23,8 +23,6 @@ namespace GXPEngine
             player = FindObjectOfType<Player>();
             hud = new HUD(player);
             AddChildAt(hud, GetChildCount()-1);
-
-
         }
 
         void Update()

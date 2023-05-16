@@ -9,6 +9,8 @@ public class MyGame : Game
     public Vec2 deltaVec = new Vec2();
     public Vec2 empLines;
 
+    public string currentLevel;
+
     public List<NLineSegment> list = new List<NLineSegment>();
     public List<Spike> spikes = new List<Spike>();
     public List<Lever> levers = new List<Lever>();
@@ -54,8 +56,6 @@ public class MyGame : Game
     public void LoadLevel(string levelName)
     {
         nextlevel = levelName;
-        
-        
     }
 
     void DestroyLevel()
@@ -69,7 +69,7 @@ public class MyGame : Game
         {
             lines.Destroy();
         }
-        foreach(Spike spike in spikes)
+        foreach (Spike spike in spikes)
         {
             spike.Destroy();
         }
@@ -81,6 +81,8 @@ public class MyGame : Game
     {
         if (nextlevel != null)
         {
+
+            currentLevel = nextlevel;
             DestroyLevel();
             _level = new Level(nextlevel);
             AddChild(_level);
@@ -88,6 +90,9 @@ public class MyGame : Game
             switch (nextlevel)
             {
                 case "level_1.tmx":
+                    if (channel != null)
+                        channel.Stop();
+
                     channel = level1.Play();
                     _level.hud.timeLeft = 120f;
                     break;

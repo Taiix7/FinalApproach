@@ -30,7 +30,6 @@ public class Player : AnimationSprite
 
     private float tt = 0;
     Sprite sticky;
-    HUD hud;
 
     private SoundChannel channel;
     private Sound hitGround;
@@ -234,9 +233,7 @@ public class Player : AnimationSprite
 
             if (minDist + 10 > dist)
             {
-                position.x = 150;
-                position.y = 700;
-                velocity = new Vec2(0, 0);
+                Dead();
             }
         }
 
@@ -317,6 +314,12 @@ public class Player : AnimationSprite
     {
         float distance = Mathf.Sqrt(Mathf.Pow(Input.mouseX - position.x, 2) + Mathf.Pow(Input.mouseY - position.y, 2));
         return distance <= radius + 5;
+    }
+
+    public void Dead() {
+        MyGame myGame = (MyGame)game;
+        myGame.CheckLoadLevel();
+        myGame.LoadLevel(myGame.currentLevel);
     }
 }
 

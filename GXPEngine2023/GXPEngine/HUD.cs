@@ -8,14 +8,11 @@ class HUD : GameObject
 
     EasyDraw timer;
 
-    String text = "";
     Player player;
-    //public float time = 4;
 
     public float timeLeft;
 
     private Sprite timerSprite;
-    public float time;
     
     private Font font = Utils.LoadFont("Celtic.ttf", 40);
 
@@ -70,5 +67,9 @@ class HUD : GameObject
 
         timer.Clear(Color.Transparent);
         timer.Text(String.Format("{0:00}:{1:00}", min, sec));
+
+        if (timeLeft <= 110) {
+            player.Dead();
+        }
     }
 }
