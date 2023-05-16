@@ -299,6 +299,36 @@ public class Player : AnimationSprite
             }
         }
 
+        foreach (Button button in myGame.buttons)
+        {
+            Vec2 difVec = position - button.position;
+
+            float minDist = radius + button.radius;
+
+            float dist = difVec.Length();
+
+            if (minDist + 10 > dist)
+            {
+                tt += 2f / 100f;
+                if (tt >= 0.4f)
+                {
+                    
+                    switch (button.connectedObject.isActive)
+                    {
+                        case true:
+                            button.SetFrame(6);
+                            button.connectedObject.isActive = false;
+                            break;
+                        case false:
+                            button.SetFrame(0);
+                            button.connectedObject.isActive = true;
+                            break;
+                    }
+                    tt = 0f;
+                }
+            }
+        }
+
         foreach (Objective objective in myGame.objectives)
         {
             Vec2 difVec = position - objective.position;

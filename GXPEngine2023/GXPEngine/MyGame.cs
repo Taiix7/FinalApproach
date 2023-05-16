@@ -18,6 +18,8 @@ public class MyGame : Game
     public List<Vent> vents = new List<Vent>();
     public List<Objective> objectives = new List<Objective>();
     public List<NLineSegment> ceillings = new List<NLineSegment>();
+    public List<Button> buttons = new List<Button>();
+    public List<NLineSegment> doors = new List<NLineSegment>();
 
     public string level = "opening.tmx";
     string nextlevel = null;
@@ -69,20 +71,7 @@ public class MyGame : Game
     public void LoadLevel(string levelName)
     {
         nextlevel = levelName;
-        
-        switch (levelName) {
-            case "level_1.tmx":
-                channel = level1.Play();
-                    break;
-            case "level_2.tmx":
-                channel.Stop();
-                channel = level2.Play();
-                break;
-            case "level_3.tmx":
-                channel.Stop();
-                channel = level3.Play();
-                break;
-        }
+       
     }
 
     void DestroyLevel()
@@ -108,10 +97,20 @@ public class MyGame : Game
         {
             objectives.Destroy();
         }
+        foreach (Button button in buttons)
+        {
+            button.Destroy();
+        }
+        foreach (NLineSegment door in doors)
+        {
+            door.Destroy();
+        }
         list.Clear();
         spikes.Clear();
         ceillings.Clear();
         objectives.Clear();
+        buttons.Clear();
+        doors.Clear();
     }
 
     public void CheckLoadLevel()
@@ -141,7 +140,12 @@ public class MyGame : Game
                 case "level_3.tmx":
                     channel.Stop();
                     channel = level3.Play();
-                    _level.hud.timeLeft = 300f;
+                    if (_level.player == null)
+                    _level.hud.LateDestroy();
+                    break;
+                default:
+                    if (_level.player == null)
+                        _level.hud.LateDestroy(); 
                     break;
             }
 

@@ -13,7 +13,7 @@ class HUD : GameObject
     public float timeLeft;
 
     private Sprite timerSprite;
-    
+
     private Font font = Utils.LoadFont("Celtic.ttf", 40);
 
 
@@ -21,18 +21,14 @@ class HUD : GameObject
     {
 
         timerSprite = new Sprite("timer.png");
+        timerSprite.SetXY(1650, 0);
         AddChild(timerSprite);
 
+
         this.player = player;
-        distance = new EasyDraw(250, 60);
-        distance.SetXY(0, 0);
-        distance.Fill(Color.White);
-        distance.TextSize(15);
-        AddChild(distance);
-        distance.collider.isTrigger = false;
 
         timer = new EasyDraw(250, 60);
-        timer.SetXY(45,25);
+        timer.SetXY(1715, 25);
         timer.Fill(Color.White);
         timer.TextSize(25);
         AddChild(timer);
@@ -40,23 +36,6 @@ class HUD : GameObject
         font = Utils.LoadFont("Celtic.ttf", 22);
         timer.TextFont(font);
     }
-
-    //public void StickToCeiling()
-    //{
-    //    time -= 0.005f;
-    //    if(((int)time) <= 0)
-    //    {
-    //        player.stickToWall = false;
-    //        time = 4;
-    //    }
-    //    if (player != null)
-    //    {
-    //        distance.Clear(Color.Transparent);
-    //        distance.Text(String.Format(text + ((int)time)));
-    //        distance.SetXY(player.x - 15, player.y - 100);
-    //    }
-    //    Console.WriteLine(time);
-    //}
 
     public void Timer()
     {
@@ -68,8 +47,10 @@ class HUD : GameObject
         timer.Clear(Color.Transparent);
         timer.Text(String.Format("{0:00}:{1:00}", min, sec));
 
-        if (timeLeft <= 110) {
-            player.Dead();
+        if (timeLeft <= 0)
+        {
+            if (player != null)
+                player.Dead();
         }
     }
 }
