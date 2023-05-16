@@ -45,7 +45,7 @@ public class Lever : AnimationSprite
     {
         float floatValueX = 0;
         float floatValueY = 0;
-        float force = 0;
+        float force = 0.5f;
 
         foreach (Property property in obj.propertyList.properties)
         {
@@ -58,7 +58,7 @@ public class Lever : AnimationSprite
                 floatValueY = float.Parse(property.Value);
             }
             else if (property.Name == "force") { 
-                force = float.Parse(property.Value);
+                //force = float.Parse(property.Value);
             }
         }
         connectedObject = new Vent(new Vec2(floatValueX, floatValueY), force);

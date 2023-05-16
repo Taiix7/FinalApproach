@@ -6,7 +6,7 @@ public class Spike : Sprite
     public int radius = 10;
     public Vec2 position;
 
-    public Spike(TiledObject obj = null) : base("torns-mid-2.png")
+    public Spike(TiledObject obj = null) : base("Empty.png")
     {
         position.x = obj.X;
         position.y = obj.Y;
