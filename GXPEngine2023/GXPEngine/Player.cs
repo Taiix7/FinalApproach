@@ -25,6 +25,7 @@ public class Player : AnimationSprite
 
     public bool stickToWall;
     private bool moving;
+    public bool ceilling;
     private bool inTheAir;
     public bool ceilling;
     private bool inTheAir;
@@ -106,7 +107,7 @@ public class Player : AnimationSprite
             if (tt >= 4)
             {
                 tt = 0f;
-                stickToWall = false;
+                //stickToWall = false;
             }
         }
     }
