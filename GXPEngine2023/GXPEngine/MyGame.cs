@@ -3,6 +3,7 @@ using GXPEngine;                                // GXPEngine contains the engine
 using System.Collections.Generic;
 using System.Threading;
 using TiledMapParser;
+using System.Reflection.Emit;
 
 public class MyGame : Game
 {
@@ -16,8 +17,9 @@ public class MyGame : Game
     public List<Lever> levers = new List<Lever>();
     public List<Vent> vents = new List<Vent>();
     public List<Objective> objectives = new List<Objective>();
+    public List<NLineSegment> ceillings = new List<NLineSegment>();
 
-    string level = "level_1.tmx";
+    public string level = "opening.tmx";
     string nextlevel = null;
 
     private Level _level;
@@ -27,6 +29,8 @@ public class MyGame : Game
     private Sound level1;
     private Sound level2;
     private Sound level3;
+
+    public int levelNum;
 
 
     public MyGame() : base(1920, 1080, false)     // Create a window that's 800x600 and NOT fullscreen
@@ -42,7 +46,7 @@ public class MyGame : Game
     void Update()
     {
         if (_level == null) return;
-        _level.player.Step();
+        if(_level.player != null) { _level.player.Step(); }
         _level.hud.Timer();
         foreach (Vent vent in vents)
         {
@@ -51,11 +55,34 @@ public class MyGame : Game
                 vent.ApplyVentEffect(_level.player);
             }
         }
+
+        if(level == "opening.tmx")
+        {
+            if(Input.GetMouseButtonUp(0))
+            {
+                level = "level_1.tmx";
+                LoadLevel(level);
+            }
+        }
     }
 
     public void LoadLevel(string levelName)
     {
         nextlevel = levelName;
+        
+        switch (levelName) {
+            case "level_1.tmx":
+                channel = level1.Play();
+                    break;
+            case "level_2.tmx":
+                channel.Stop();
+                channel = level2.Play();
+                break;
+            case "level_3.tmx":
+                channel.Stop();
+                channel = level3.Play();
+                break;
+        }
     }
 
     void DestroyLevel()
@@ -73,8 +100,18 @@ public class MyGame : Game
         {
             spike.Destroy();
         }
+        foreach(NLineSegment ceillings in ceillings)
+        {
+            ceillings.Destroy();
+        }
+        foreach (GameObject objectives in objectives)
+        {
+            objectives.Destroy();
+        }
         list.Clear();
         spikes.Clear();
+        ceillings.Clear();
+        objectives.Clear();
     }
 
     public void CheckLoadLevel()

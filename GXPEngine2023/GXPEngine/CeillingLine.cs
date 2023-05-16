@@ -1,7 +1,7 @@
 ﻿using GXPEngine;
 using TiledMapParser;
 
-class CeillingLine : Sprite
+public class CeillingLine : Sprite
 {
     NLineSegment lineCeilling;
 
@@ -9,6 +9,6 @@ class CeillingLine : Sprite
     {
         lineCeilling = new NLineSegment(obj.X, obj.Y, obj.X + obj.Width, obj.Y, 0xffffffff, 3);
         MyGame myGame = (MyGame)game;
-        myGame.list.Add(lineCeilling);
+        myGame.ceillings.Add(lineCeilling);
     }
 }
