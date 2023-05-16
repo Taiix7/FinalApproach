@@ -31,7 +31,7 @@ namespace GXPEngine
         {
             if(player.ceilling)
             {
-                hud.StickToCeiling();
+                //hud.StickToCeiling();
             }
         }
     }

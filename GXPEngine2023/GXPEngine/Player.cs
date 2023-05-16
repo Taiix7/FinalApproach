@@ -23,7 +23,7 @@ public class Player : AnimationSprite
     public Vec2 acceleration;
     public Vec2 _oldPosition;
 
-    private bool stickToWall = false;
+    public bool stickToWall;
     private bool moving;
     private bool inTheAir;
     public bool ceilling;
@@ -31,6 +31,7 @@ public class Player : AnimationSprite
 
     private float tt = 0;
     Sprite sticky;
+    HUD hud;
 
     private SoundChannel channel;
     private Sound hitGround;
@@ -47,9 +48,16 @@ public class Player : AnimationSprite
         sticky.width = 32;
         sticky.height = 32;
         sticky.SetXY(-16, -16);
+        
         position.x = obj.X;
         position.y = obj.Y;
+        sticky.width = 32;
+        sticky.height = 32;
+        sticky.SetXY(-16,-16);
         AddChild(sticky);
+        hud = new HUD(this);
+        AddChild(hud);
+        
         SetOrigin(_radius, _radius);
 
         hitGround = new Sound("slime_hit.wav");
@@ -80,6 +88,7 @@ public class Player : AnimationSprite
 
     public void Step()
     {
+        sticky.visible = stickToWall;
         PlayerControl();
         PlayerPhysics();
         CheckCollision();
@@ -114,7 +123,7 @@ public class Player : AnimationSprite
             if (tt >= 4)
             {
                 tt = 0f;
-                stickToWall = false;
+                //stickToWall = false;
             }
         }
 
@@ -132,7 +141,6 @@ public class Player : AnimationSprite
             channel = jumpSound.Play();
 
             moving = true;
-            stickToWall = true;
             canPlay = true;
             inTheAir = true;
 
@@ -255,6 +263,13 @@ public class Player : AnimationSprite
 
             if (minDist + 10 > dist)
             {
+                if(lever.connectedObject.isActive)
+                {
+                    for(int i=0; i<5; i++)
+                    {
+                        lever.NextFrame();
+                    }
+                }
                 lever.connectedObject.isActive = false;
             }
         }
