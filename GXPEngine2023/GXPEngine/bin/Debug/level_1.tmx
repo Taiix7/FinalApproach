@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="95">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="95">
  <tileset firstgid="1" name="building blocks 1" tilewidth="32" tileheight="32" tilecount="294" columns="21">
   <image source="Building_blocks.png" width="672" height="448"/>
  </tileset>
@@ -21,14 +21,14 @@
 35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610613057,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610613055,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610613055,34,118,118,118,118,118,118,118,118,118,118,118,118,118,118,118,118,118,118,118,118,118,118,
-35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610613055,34,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,
-35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,71,76,76,76,77,0,0,0,0,0,1610613055,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610613055,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610613055,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610613056,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,118,118,118,118,118,118,118,118,118,118,118,118,118,118,118,118,118,118,118,118,118,118,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,71,76,76,76,77,0,0,0,0,0,0,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,137,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -85,6 +85,15 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="9" name="Lever">
+  <object id="55" name="Lever" type="Lever" x="1760" y="640" width="64" height="64">
+   <properties>
+    <property name="connectedX" type="float" value="1088"/>
+    <property name="connectedY" type="float" value="160"/>
+    <property name="force" type="float" value="0.5"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup id="2" name="LevelLine">
   <object id="6" name="LevelLine" type="LevelLine" x="544" y="864" width="-544" height="31.6667"/>
   <object id="8" name="LevelLine" type="LevelLine" x="928" y="864" width="-222.5" height="33.7542"/>
@@ -97,29 +106,18 @@
   <object id="37" name="LevelLineVertical" type="LevelLineVertical" x="512" y="1088" width="32" height="-224"/>
   <object id="38" name="LevelLineVertical" type="LevelLineVertical" x="1888" y="448" width="32" height="252.667"/>
   <object id="39" name="LevelLineVertical" type="LevelLineVertical" x="0" y="864" width="32" height="-862.67"/>
-  <object id="40" name="LevelLine" type="LevelLine" x="31.3333" y="0.16665" width="1885.83" height="31.6667"/>
+  <object id="40" name="CeillingLine" type="CeillingLine" x="31.3333" y="0.16665" width="1885.83" height="31.6667"/>
   <object id="48" name="LevelLineVertical" type="LevelLineVertical" x="1474" y="699.667" width="32" height="388.333"/>
-  <object id="49" name="LevelLine" type="LevelLine" x="1216" y="416" width="704" height="31.333"/>
+  <object id="49" name="CeillingLine" type="CeillingLine" x="1216" y="416" width="704" height="31.333"/>
   <object id="50" name="LevelLineVertical" type="LevelLineVertical" x="1184" y="640" width="32" height="-512"/>
   <object id="51" name="LevelLineVertical" type="LevelLineVertical" x="1056" y="224" width="32" height="-224"/>
   <object id="94" name="LevelLineVertical" type="LevelLineVertical" x="1888" y="0" width="32" height="384"/>
- </objectgroup>
- <objectgroup id="10" name="Vent"/>
- <objectgroup id="9" name="Lever">
-  <object id="55" name="Lever" type="Lever" x="1760" y="640" width="64" height="64">
-   <properties>
-    <property name="connectedX" type="float" value="1088"/>
-    <property name="connectedY" type="float" value="160"/>
-    <property name="force" type="float" value="0.5"/>
-   </properties>
-  </object>
  </objectgroup>
  <objectgroup id="7" name="Objective">
   <object id="54" name="Objective" type="Objective" x="1504" y="288" width="96" height="96"/>
  </objectgroup>
  <objectgroup id="5" name="Spike">
   <object id="42" name="Spike" type="Spike" x="544" y="1088" width="32" height="32"/>
-  <object id="45" name="Spike" type="Spike" x="1152" y="416" width="34" height="32" rotation="-90"/>
   <object id="57" name="Spike" type="Spike" x="576" y="1088" width="32" height="32"/>
   <object id="58" name="Spike" type="Spike" x="608" y="1088" width="32" height="32"/>
   <object id="59" name="Spike" type="Spike" x="640" y="1088" width="32" height="32"/>
@@ -150,13 +148,6 @@
   <object id="84" name="Spike" type="Spike" x="1440" y="1088" width="32" height="32"/>
   <object id="85" name="Spike" type="Spike" x="1472" y="1088" width="32" height="32"/>
   <object id="86" name="Spike" type="Spike" x="512" y="1088" width="32" height="32"/>
-  <object id="87" name="Spike" type="Spike" x="1152" y="384" width="34" height="32" rotation="-90"/>
-  <object id="88" name="Spike" type="Spike" x="1150" y="350" width="34" height="32" rotation="-90"/>
-  <object id="89" name="Spike" type="Spike" x="1152" y="576" width="34" height="32" rotation="-90"/>
-  <object id="90" name="Spike" type="Spike" x="1152" y="448" width="34" height="32" rotation="-90"/>
-  <object id="91" name="Spike" type="Spike" x="1152" y="480" width="34" height="32" rotation="-90"/>
-  <object id="92" name="Spike" type="Spike" x="1152" y="544" width="34" height="32" rotation="-90"/>
-  <object id="93" name="Spike" type="Spike" x="1152" y="512" width="34" height="32" rotation="-90"/>
  </objectgroup>
  <objectgroup id="4" name="LevelLineVertical"/>
  <objectgroup id="6" name="Player">

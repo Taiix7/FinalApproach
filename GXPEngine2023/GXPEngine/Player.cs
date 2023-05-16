@@ -1,8 +1,9 @@
 using GXPEngine;
 using System;
+using System.Reflection.Emit;
 using TiledMapParser;
 
-public class Player : Sprite
+public class Player : AnimationSprite
 {
     public int radius { get { return _radius; } }
 
@@ -22,11 +23,13 @@ public class Player : Sprite
     public Vec2 acceleration;
     public Vec2 _oldPosition;
 
-    private bool stickToWall = false;
+    public bool stickToWall;
     private bool moving;
     private bool inTheAir;
+    public bool ceilling;
 
     private float tt = 0;
+    Sprite sticky;
 
     private SoundChannel channel;
     private Sound hitGround;
@@ -36,11 +39,16 @@ public class Player : Sprite
 
     private bool clickedPlayer;
 
-    public Player(TiledObject obj = null) : base("Slime_Luca.png")
+    public Player(TiledObject obj = null) : base("Bounce Sheet Square.png",4,4)
     {
 
+        sticky = new Sprite("Slime_Luca.png");
+        sticky.width = 32;
+        sticky.height = 32;
+        sticky.SetXY(-16, -16);
         position.x = obj.X;
         position.y = obj.Y;
+        AddChild(sticky);
         SetOrigin(_radius, _radius);
 
         hitGround = new Sound("slime_hit.wav");
@@ -74,6 +82,7 @@ public class Player : Sprite
         PlayerControl();
         PlayerPhysics();
         CheckCollision();
+        sticky.visible = stickToWall;
         velocity *= 0.99f;
         _oldPosition = position;
         UpdateScreenPosition();
@@ -249,8 +258,8 @@ public class Player : Sprite
 
             if (minDist + 10 > dist)
             {
-                myGame.LoadLevel("level2.tmx");
                 channel = winSound.Play();
+                myGame.LoadLevel("level_2_real.tmx");
             }
         }
 
@@ -279,6 +288,7 @@ public class Player : Sprite
                 acceleration = new Vec2(0, 0);
                 velocity = new Vec2(0, 0);
             }
+            
             position -= (-difline + radius) * col.normal;
             velocity.Reflect(col.normal);
         }

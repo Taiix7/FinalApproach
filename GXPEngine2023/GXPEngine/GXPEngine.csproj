@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CeillingLine.cs" />
     <Compile Include="CollisionInfo.cs" />
     <Compile Include="GXPEngine\AddOns\Gizmos.cs" />
     <Compile Include="GXPEngine\AddOns\SpriteBatch.cs" />
@@ -47,6 +48,7 @@
     <Compile Include="GXPEngine\Components\Arrow.cs" />
     <Compile Include="GXPEngine\Components\LineSegment.cs" />
     <Compile Include="GXPEngine\Components\NLineSegment.cs" />
+    <Compile Include="HUD.cs" />
     <Compile Include="LevelLine.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="LevelLineVertical.cs" />

@@ -8,7 +8,7 @@ public class Vent : AnimationSprite
 
     private float detectionRangeY = 500f;
     private float ventWidth = 50f;
-    private float forcePower = -0.5f;
+    private float forcePower = 0.5f;
 
     private Sound ventSound;
     private SoundChannel ch;

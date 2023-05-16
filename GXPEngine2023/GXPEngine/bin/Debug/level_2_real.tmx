@@ -1,71 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="45">
- <tileset firstgid="1" name="mushroom-spritesheet" tilewidth="32" tileheight="32" tilecount="20" columns="10">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="94">
+ <tileset firstgid="1" name="mushroom-spritesheet" tilewidth="32" tileheight="32" tilecount="0" columns="10">
   <image source="sprites/mushroom-spritesheet.png" width="320" height="64"/>
  </tileset>
- <tileset firstgid="21" name="building blocks 1" tilewidth="32" tileheight="32" tilecount="294" columns="21">
-  <image source="sprites/Building_blocks.png" width="672" height="448"/>
+ <tileset firstgid="1" name="building blocks 1" tilewidth="32" tileheight="32" tilecount="294" columns="21">
+  <image source="Building_blocks.png" width="672" height="448"/>
  </tileset>
- <tileset firstgid="315" name="building blocks 2" tilewidth="32" tileheight="32" tilecount="28" columns="4">
-  <image source="sprites/buildingblocks.png" width="128" height="224"/>
+ <tileset firstgid="295" name="building blocks 2" tilewidth="32" tileheight="32" tilecount="28" columns="4">
+  <image source="buildingblocks.png" width="128" height="224"/>
  </tileset>
- <tileset firstgid="343" name="bouncy state" tilewidth="32" tileheight="32" tilecount="14" columns="14">
+ <tileset firstgid="323" name="bouncy state" tilewidth="32" tileheight="32" tilecount="0" columns="14">
   <image source="sprites/Bounce Sheet Row.png" width="448" height="32"/>
  </tileset>
- <tileset firstgid="357" name="button" tilewidth="32" tileheight="32" tilecount="24" columns="12">
-  <image source="sprites/button-sprite-sheet-64x64-v2.png" width="384" height="64"/>
+ <tileset firstgid="323" name="button" tilewidth="32" tileheight="32" tilecount="24" columns="12">
+  <image source="button-sprite-sheet-64x64-v2.png" width="384" height="64"/>
  </tileset>
- <tileset firstgid="381" name="trees" tilewidth="32" tileheight="32" tilecount="600" columns="30">
+ <tileset firstgid="347" name="trees" tilewidth="32" tileheight="32" tilecount="0" columns="30">
   <image source="sprites/trees.png" width="960" height="640"/>
  </tileset>
- <tileset firstgid="981" name="flower ventilator" tilewidth="32" tileheight="32" tilecount="24" columns="12">
-  <image source="sprites/flower-spritesheet-96x64.png" width="384" height="64"/>
+ <tileset firstgid="347" name="flower ventilator" tilewidth="32" tileheight="32" tilecount="24" columns="12">
+  <image source="flower-vent.png" width="384" height="64"/>
  </tileset>
- <tileset firstgid="1005" name="huge mushroom 1" tilewidth="32" tileheight="32" tilecount="12" columns="3">
+ <tileset firstgid="371" name="huge mushroom 1" tilewidth="32" tileheight="32" tilecount="0" columns="3">
   <image source="sprites/Clutter_huge_mushroom_3x4.png" width="96" height="128"/>
  </tileset>
- <tileset firstgid="1017" name="huge mushroom 2" tilewidth="32" tileheight="32" tilecount="12" columns="3">
+ <tileset firstgid="371" name="huge mushroom 2" tilewidth="32" tileheight="32" tilecount="0" columns="3">
   <image source="sprites/Clutter_two_mushrooms_3x4.png" width="96" height="128"/>
  </tileset>
- <tileset firstgid="1029" name="end level" tilewidth="32" tileheight="32" tilecount="4" columns="2">
-  <image source="sprites/End_Idle.png" width="64" height="64"/>
+ <tileset firstgid="371" name="end level" tilewidth="32" tileheight="32" tilecount="4" columns="2">
+  <image source="End_Idle.png" width="64" height="64"/>
  </tileset>
  <layer id="1" name="Tile Layer 1" width="60" height="34">
   <data encoding="csv">
-94,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,94,94,94,55,0,0,0,0,0,0,0,54,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,
-55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,55,0,0,0,0,0,0,0,54,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,
-55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,55,0,0,0,1029,1030,0,0,54,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,
-55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,55,0,0,0,1031,1032,0,0,54,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,
-55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,55,0,0,0,0,0,0,0,54,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,
-55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,55,0,0,0,0,0,0,0,54,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,
-55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,55,336,337,336,336,336,336,338,75,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,94,94,94,94,94,94,94,
-55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,94,94,94,94,
-55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,94,94,94,94,
-55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,94,94,94,94,
-55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,94,94,94,94,
-55,0,0,369,370,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,94,94,94,94,
-94,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,34,0,0,0,0,0,0,54,94,94,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,94,94,94,94,
-94,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,160,0,0,0,0,0,0,54,94,94,94,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,34,0,0,0,0,0,0,54,94,94,94,94,94,94,
-55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,75,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,159,160,0,0,0,0,0,0,75,159,159,159,159,159,0,
-55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610613077,
-55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610613075,
-55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610613075,
-55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610613075,
-55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610613075,
-55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610613075,
-55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610613075,
-94,32,32,32,32,32,32,32,32,32,32,32,32,32,32,34,0,0,0,0,0,33,32,32,32,32,32,32,32,32,32,32,34,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,32,32,32,32,34,0,0,0,0,0,0,1610613075,
-94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,55,0,0,0,0,0,54,94,94,94,94,94,94,94,94,94,94,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,94,94,55,0,0,0,0,0,0,1610613075,
-94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,55,0,0,0,0,0,54,94,94,94,94,94,94,94,94,94,94,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,94,94,55,0,0,0,0,0,0,1610613075,
-94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,55,0,0,0,0,0,54,94,94,94,94,94,94,94,94,94,94,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,94,94,55,0,0,0,0,0,0,1610613075,
-94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,55,0,0,0,0,0,54,94,94,94,94,94,94,94,94,94,94,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,94,94,55,0,0,0,0,0,0,1610613075,
-94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,55,0,0,0,0,0,54,94,94,94,94,94,94,94,94,94,94,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,94,94,55,0,0,0,0,0,0,1610613075,
-94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,55,0,0,0,0,0,54,94,94,94,94,94,94,94,94,94,94,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,94,94,55,0,0,0,0,0,0,1610613075,
-94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,55,0,0,0,0,0,54,94,94,94,94,94,94,94,94,94,94,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,94,94,55,0,0,0,0,0,0,1610613075,
-94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,55,0,0,0,0,0,54,94,94,94,94,94,94,94,94,94,94,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,94,94,55,0,0,0,0,0,0,1610613075,
-94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,55,0,0,0,0,0,54,94,94,94,94,94,94,94,94,94,94,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,94,94,55,0,0,0,0,0,0,1610613075,
-94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,55,0,0,0,0,0,54,94,94,94,94,94,94,94,94,94,94,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,94,94,94,94,55,0,0,0,0,0,0,1610613075,
-94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,55,340,339,339,339,341,54,94,94,94,94,94,94,94,94,94,94,55,340,339,339,339,339,339,339,339,339,339,339,339,339,341,54,94,94,94,94,55,340,339,339,339,339,339,340
+74,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,74,74,74,35,0,0,0,0,0,0,0,34,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,35,0,0,0,0,0,0,0,34,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,35,0,0,0,0,0,0,0,34,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,35,0,0,0,0,0,0,0,34,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,35,0,0,0,0,0,0,0,34,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,35,0,0,0,0,0,0,0,34,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,35,0,0,0,0,0,0,0,55,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,74,74,74,74,74,74,74,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,74,74,74,74,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,74,74,74,74,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,74,74,74,74,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,74,74,74,74,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,74,74,74,74,
+74,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,14,0,0,0,0,0,0,34,74,74,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,74,74,74,74,
+74,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,140,0,0,0,0,0,0,34,74,74,74,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,14,0,0,0,0,0,0,34,74,74,74,74,74,74,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,55,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,139,140,0,0,0,0,0,0,55,139,139,139,139,139,0,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610613057,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610613055,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610613055,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610613055,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610613055,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610613055,
+35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610613055,
+74,12,12,12,12,12,12,12,12,12,12,12,12,12,12,14,0,0,0,0,0,13,12,12,12,12,12,12,12,12,12,12,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,12,12,12,12,14,0,0,0,0,0,0,1610613055,
+74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,35,0,0,0,0,0,34,74,74,74,74,74,74,74,74,74,74,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,74,74,35,0,0,0,0,0,0,1610613055,
+74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,35,0,0,0,0,0,34,74,74,74,74,74,74,74,74,74,74,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,74,74,35,0,0,0,0,0,0,1610613055,
+74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,35,0,0,0,0,0,34,74,74,74,74,74,74,74,74,74,74,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,74,74,35,0,0,0,0,0,0,1610613055,
+74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,35,0,0,0,0,0,34,74,74,74,74,74,74,74,74,74,74,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,74,74,35,0,0,0,0,0,0,1610613055,
+74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,35,0,0,0,0,0,34,74,74,74,74,74,74,74,74,74,74,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,74,74,35,0,0,0,0,0,0,1610613055,
+74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,35,0,0,0,0,0,34,74,74,74,74,74,74,74,74,74,74,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,74,74,35,0,0,0,0,0,0,1610613055,
+74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,35,0,0,0,0,0,34,74,74,74,74,74,74,74,74,74,74,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,74,74,35,0,0,0,0,0,0,1610613055,
+74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,35,0,0,0,0,0,34,74,74,74,74,74,74,74,74,74,74,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,74,74,35,0,0,0,0,0,0,1610613055,
+74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,35,0,0,0,0,0,34,74,74,74,74,74,74,74,74,74,74,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,74,74,35,0,0,0,0,0,0,1610613055,
+74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,35,0,0,0,0,0,34,74,74,74,74,74,74,74,74,74,74,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,74,74,74,74,35,0,0,0,0,0,0,1610613055,
+74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,35,320,319,319,319,321,34,74,74,74,74,74,74,74,74,74,74,35,320,319,319,319,319,319,319,319,319,319,319,319,319,321,34,74,74,74,74,35,320,319,319,319,319,319,320
 </data>
  </layer>
  <layer id="3" name="Background" width="60" height="34">
@@ -106,32 +106,94 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="2" name="LevelLine" class="LevelLine">
-  <object id="1" name="LevelLine" type="LevelLine" x="0" y="704" width="512" height="31"/>
-  <object id="8" name="LevelLine" type="LevelLine" x="0" y="384" width="544" height="64"/>
-  <object id="10" name="LevelLineVertical" type="LevelLineVertical" x="736" y="0" width="128" height="480"/>
-  <object id="12" name="LevelLine" type="LevelLine" x="1503.48" y="703.195" width="192.52" height="30.805"/>
-  <object id="13" name="LevelLine" type="LevelLine" x="864" y="416" width="640" height="64"/>
-  <object id="16" name="LevelLine" type="LevelLine" x="1088" y="191.333" width="640.667" height="32.6667"/>
+ <objectgroup id="7" name="Lever">
+  <object id="90" name="Lever" type="Lever" x="128" y="320" width="64" height="64">
+   <properties>
+    <property name="connectedX" type="float" value="864"/>
+    <property name="connectedY" type="float" value="192"/>
+   </properties>
+  </object>
+  <object id="91" name="Lever" type="Lever" x="128" y="320" width="64" height="64">
+   <properties>
+    <property name="connectedX" type="float" value="992"/>
+    <property name="connectedY" type="float" value="192"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="8" name="Objective">
+  <object id="93" name="Objective" type="Objective" x="928" y="32" width="96" height="96"/>
+ </objectgroup>
+ <objectgroup id="2" name="LevelLine">
+  <object id="1" name="LevelLine" type="LevelLine" x="512" y="704" width="-512" height="31"/>
+  <object id="8" name="CeillingLine" type="CeillingLine" x="0" y="416" width="544" height="32"/>
+  <object id="10" name="LevelLineVertical" type="LevelLineVertical" x="736" y="0" width="32" height="480"/>
+  <object id="12" name="LevelLine" type="LevelLine" x="1696" y="704" width="-192.52" height="30.805"/>
+  <object id="13" name="CeillingLine" type="CeillingLine" x="736" y="448" width="768" height="32"/>
+  <object id="16" name="CeillingLine" type="CeillingLine" x="1088" y="191.333" width="640.667" height="32.6667"/>
   <object id="17" name="LevelLineVertical" type="LevelLineVertical" x="1696" y="224" width="31.8182" height="256"/>
-  <object id="18" name="LevelLine" type="LevelLine" x="864" y="192" width="224" height="32"/>
-  <object id="20" name="LevelLineVertical" type="LevelLineVertical" x="0" y="0" width="32" height="384"/>
-  <object id="21" name="LevelLine" type="LevelLine" x="32" y="0" width="704" height="32"/>
-  <object id="24" name="LevelLineVertical" type="LevelLineVertical" x="0" y="448" width="32" height="256"/>
-  <object id="27" name="LevelLine" type="LevelLine" x="672" y="704" width="384" height="31"/>
-  <object id="28" name="LevelLine" type="LevelLine" x="1728.2" y="447" width="159.837" height="33"/>
+  <object id="20" name="LevelLineVertical" type="LevelLineVertical" x="0" y="416" width="32" height="-416"/>
+  <object id="21" name="CeillingLine" type="CeillingLine" x="32" y="0" width="704" height="32"/>
+  <object id="24" name="LevelLineVertical" type="LevelLineVertical" x="0" y="704" width="32" height="-288"/>
+  <object id="27" name="LevelLine" type="LevelLine" x="1056" y="704" width="-384" height="31"/>
+  <object id="28" name="CeillingLine" type="CeillingLine" x="1696" y="447" width="224" height="33"/>
   <object id="31" name="LevelLineVertical" type="LevelLineVertical" x="1088" y="0" width="32" height="190.667"/>
   <object id="40" name="LevelLineVertical" type="LevelLineVertical" x="671.667" y="736.167" width="32" height="349.333"/>
-  <object id="41" name="LevelLineVertical" type="LevelLineVertical" x="480" y="734.667" width="32" height="349.333"/>
-  <object id="42" name="LevelLineVertical" type="LevelLineVertical" x="1024" y="736" width="32" height="349.333"/>
+  <object id="41" name="LevelLineVertical" type="LevelLineVertical" x="480" y="1088" width="32" height="-349.33"/>
+  <object id="42" name="LevelLineVertical" type="LevelLineVertical" x="1024" y="1088" width="32" height="-349.33"/>
   <object id="43" name="LevelLineVertical" type="LevelLineVertical" x="1504" y="736" width="32" height="349.333"/>
-  <object id="44" name="LevelLineVertical" type="LevelLineVertical" x="1664" y="736" width="32" height="349.333"/>
+  <object id="44" name="LevelLineVertical" type="LevelLineVertical" x="1664" y="1088" width="32" height="-349.33"/>
+  <object id="47" name="LevelLine" type="LevelLine" x="544" y="384" width="-544" height="32"/>
+  <object id="48" name="LevelLine" type="LevelLine" x="1504" y="416" width="-672" height="32"/>
+  <object id="49" name="LevelLineVertical" type="LevelLineVertical" x="832" y="448" width="32" height="-448"/>
+ </objectgroup>
+ <objectgroup id="6" name="Player">
+  <object id="46" name="Player" type="Player" x="96" y="640" width="64" height="64"/>
  </objectgroup>
  <objectgroup id="5" name="Spike">
-  <object id="33" name="Spike" type="Spike" x="512" y="1056" width="160" height="32"/>
-  <object id="37" name="Spike" type="Spike" x="1056" y="1056" width="448" height="32"/>
-  <object id="38" name="Spike" type="Spike" x="1888" y="480" width="32" height="608"/>
-  <object id="39" name="Spike" type="Spike" x="1696" y="1056" width="192" height="32"/>
+  <object id="33" name="Spike" type="Spike" x="512" y="1056" width="32" height="32"/>
+  <object id="37" name="Spike" type="Spike" x="1056" y="1056" width="32" height="32"/>
+  <object id="38" name="Spike" type="Spike" x="1888" y="1056" width="32" height="32"/>
+  <object id="39" name="Spike" type="Spike" x="1696" y="1056" width="32" height="32"/>
+  <object id="50" name="Spike" type="Spike" x="544" y="1056" width="32" height="32"/>
+  <object id="51" name="Spike" type="Spike" x="576" y="1056" width="32" height="32"/>
+  <object id="52" name="Spike" type="Spike" x="608" y="1056" width="32" height="32"/>
+  <object id="53" name="Spike" type="Spike" x="640" y="1056" width="32" height="32"/>
+  <object id="54" name="Spike" type="Spike" x="1088" y="1056" width="32" height="32"/>
+  <object id="55" name="Spike" type="Spike" x="1120" y="1056" width="32" height="32"/>
+  <object id="56" name="Spike" type="Spike" x="1152" y="1056" width="32" height="32"/>
+  <object id="57" name="Spike" type="Spike" x="1184" y="1056" width="32" height="32"/>
+  <object id="58" name="Spike" type="Spike" x="1216" y="1056" width="32" height="32"/>
+  <object id="59" name="Spike" type="Spike" x="1248" y="1056" width="32" height="32"/>
+  <object id="60" name="Spike" type="Spike" x="1280" y="1056" width="32" height="32"/>
+  <object id="61" name="Spike" type="Spike" x="1312" y="1056" width="32" height="32"/>
+  <object id="62" name="Spike" type="Spike" x="1344" y="1056" width="32" height="32"/>
+  <object id="63" name="Spike" type="Spike" x="1376" y="1056" width="32" height="32"/>
+  <object id="64" name="Spike" type="Spike" x="1408" y="1056" width="32" height="32"/>
+  <object id="65" name="Spike" type="Spike" x="1440" y="1056" width="32" height="32"/>
+  <object id="66" name="Spike" type="Spike" x="1472" y="1056" width="32" height="32"/>
+  <object id="67" name="Spike" type="Spike" x="1728" y="1056" width="32" height="32"/>
+  <object id="68" name="Spike" type="Spike" x="1760" y="1056" width="32" height="32"/>
+  <object id="69" name="Spike" type="Spike" x="1792" y="1056" width="32" height="32"/>
+  <object id="70" name="Spike" type="Spike" x="1824" y="1056" width="32" height="32"/>
+  <object id="71" name="Spike" type="Spike" x="1856" y="1056" width="32" height="32"/>
+  <object id="72" name="Spike" type="Spike" x="1888" y="1024" width="32" height="32"/>
+  <object id="73" name="Spike" type="Spike" x="1888" y="992" width="32" height="32"/>
+  <object id="74" name="Spike" type="Spike" x="1888" y="960" width="32" height="32"/>
+  <object id="75" name="Spike" type="Spike" x="1888" y="928" width="32" height="32"/>
+  <object id="76" name="Spike" type="Spike" x="1888" y="896" width="32" height="32"/>
+  <object id="77" name="Spike" type="Spike" x="1888" y="864" width="32" height="32"/>
+  <object id="78" name="Spike" type="Spike" x="1888" y="832" width="32" height="32"/>
+  <object id="79" name="Spike" type="Spike" x="1888" y="800" width="32" height="32"/>
+  <object id="80" name="Spike" type="Spike" x="1888" y="768" width="32" height="32"/>
+  <object id="81" name="Spike" type="Spike" x="1888" y="736" width="32" height="32"/>
+  <object id="82" name="Spike" type="Spike" x="1888" y="704" width="32" height="32"/>
+  <object id="83" name="Spike" type="Spike" x="1888" y="672" width="32" height="32"/>
+  <object id="84" name="Spike" type="Spike" x="1888" y="640" width="32" height="32"/>
+  <object id="85" name="Spike" type="Spike" x="1888" y="608" width="32" height="32"/>
+  <object id="86" name="Spike" type="Spike" x="1888" y="576" width="32" height="32"/>
+  <object id="87" name="Spike" type="Spike" x="1888" y="544" width="32" height="32"/>
+  <object id="88" name="Spike" type="Spike" x="1888" y="512" width="32" height="32"/>
+  <object id="89" name="Spike" type="Spike" x="1888" y="480" width="32" height="32"/>
  </objectgroup>
- <objectgroup id="4" name="LevelLineVertical" class="LevelLineVertical"/>
+ <objectgroup id="4" name="LevelLineVertical"/>
 </map>

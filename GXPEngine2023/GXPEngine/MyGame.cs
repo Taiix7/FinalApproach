@@ -1,6 +1,7 @@
 using System;                                   // System contains a lot of default C# libraries 
 using GXPEngine;                                // GXPEngine contains the engine
 using System.Collections.Generic;
+using System.Threading;
 
 public class MyGame : Game
 {
@@ -78,9 +79,19 @@ public class MyGame : Game
         {
             child.Destroy();
         }
+        foreach (NLineSegment lines in list)
+        {
+            lines.Destroy();
+        }
+        foreach(Spike spike in spikes)
+        {
+            spike.Destroy();
+        }
+        list.Clear();
+        spikes.Clear();
     }
 
-    void CheckLoadLevel()
+    public void CheckLoadLevel()
     {
         if (nextlevel != null)
         {
@@ -96,6 +107,8 @@ public class MyGame : Game
         time = Time.time / 1000;
         int min = (int)Math.Floor(time / 60);
         int sec = (int)Math.Floor(time % 60);
+
+        //Console.WriteLine(string.Format("{0:00}:{1:00}", min, sec));
     }
 
 
