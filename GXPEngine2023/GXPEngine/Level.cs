@@ -24,13 +24,5 @@ namespace GXPEngine
             hud = new HUD(player);
             AddChildAt(hud, GetChildCount()-1);
         }
-
-        void Update()
-        {
-            if(player.ceilling)
-            {
-                //hud.StickToCeiling();
-            }
-        }
     }
 }
