@@ -5,7 +5,7 @@ namespace GXPEngine
     class Level : GameObject
     {
         TiledLoader loader;
-        HUD hud;
+        public HUD hud;
 
         public Player player { get; private set; }
         public Level(string filename)

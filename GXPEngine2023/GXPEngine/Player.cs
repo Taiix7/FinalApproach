@@ -27,8 +27,6 @@ public class Player : AnimationSprite
     private bool moving;
     public bool ceilling;
     private bool inTheAir;
-    public bool ceilling;
-    private bool inTheAir;
 
     private float tt = 0;
     Sprite sticky;
@@ -56,8 +54,6 @@ public class Player : AnimationSprite
         sticky.height = 32;
         sticky.SetXY(-16,-16);
         AddChild(sticky);
-        hud = new HUD(this);
-        AddChild(hud);
         
         SetOrigin(_radius, _radius);
 
@@ -117,16 +113,6 @@ public class Player : AnimationSprite
         StickyTimer();
 
         if (Input.GetKeyDown(Key.SPACE)) stickToWall = !stickToWall;
-
-        if (stickToWall && !inTheAir)
-        {
-            tt += 2f / 100f;
-            if (tt >= 4)
-            {
-                tt = 0f;
-                //stickToWall = false;
-            }
-        }
 
         Vec2 deltaVec = position - new Vec2(Input.mouseX, Input.mouseY);
 

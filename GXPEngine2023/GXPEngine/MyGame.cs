@@ -20,8 +20,6 @@ public class MyGame : Game
 
     private Level _level;
 
-    private float time;
-
     //Sounds
     private SoundChannel channel;
     private Sound level1;
@@ -43,8 +41,7 @@ public class MyGame : Game
     {
         if (_level == null) return;
         _level.player.Step();
-        Timer();
-
+        _level.hud.Timer();
         foreach (Vent vent in vents)
         {
             if (vent.IsPlayerInRange(_level.player))
@@ -58,19 +55,7 @@ public class MyGame : Game
     {
         nextlevel = levelName;
         
-        switch (levelName) {
-            case "level_1.tmx":
-                channel = level1.Play();
-                    break;
-            case "level_2.tmx":
-                channel.Stop();
-                channel = level2.Play();
-                break;
-            case "level_3.tmx":
-                channel.Stop();
-                channel = level3.Play();
-                break;
-        }
+        
     }
 
     void DestroyLevel()
@@ -99,17 +84,28 @@ public class MyGame : Game
             DestroyLevel();
             _level = new Level(nextlevel);
             AddChild(_level);
+
+            switch (nextlevel)
+            {
+                case "level_1.tmx":
+                    channel = level1.Play();
+                    _level.hud.timeLeft = 120f;
+                    break;
+                case "level_2_real.tmx":
+                    channel.Stop();
+                    channel = level2.Play();
+                    _level.hud.timeLeft = 180f;
+                    break;
+                case "level_3.tmx":
+                    channel.Stop();
+                    channel = level3.Play();
+                    _level.hud.timeLeft = 300f;
+                    break;
+            }
+
             nextlevel = null;
         }
     }
-
-    void Timer()
-    {
-        time = Time.time / 1000;
-        int min = (int)Math.Floor(time / 60);
-        int sec = (int)Math.Floor(time % 60);
-    }
-
 
     static void Main()                          // Main() is the first method that's called when the program is run
     {
