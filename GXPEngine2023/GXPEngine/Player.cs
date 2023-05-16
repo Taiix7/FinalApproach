@@ -1,8 +1,9 @@
 using GXPEngine;
 using System;
+using System.Reflection.Emit;
 using TiledMapParser;
 
-public class Player : Sprite
+public class Player : AnimationSprite
 {
     public int radius { get { return _radius; } }
 
@@ -22,16 +23,27 @@ public class Player : Sprite
     public Vec2 acceleration;
     public Vec2 _oldPosition;
 
-    private bool stickToWall;
+    private bool stickToWall = false;
     private bool moving;
+    public bool ceilling;
+    private bool inTheAir;
 
+    private float tt = 0;
+    Sprite sticky;
 
-    public Player(TiledObject obj = null) : base("Slime_Luca.png")
+    private Sound hitGround;
+    private bool canPlay = true;
+    private bool clickedPlayer;
+    public Player(TiledObject obj = null) : base("Bounce Sheet Square.png",4,4)
     {
+
         position.x = obj.X;
         position.y = obj.Y;
+        AddChild(sticky);
         //UpdateScreenPosition();
         SetOrigin(_radius, _radius);
+
+        hitGround = new Sound("slime_hit.wav");
     }
 
     public void Gravity()
@@ -49,16 +61,19 @@ public class Player : Sprite
     void PlayerPhysics()
     {
         Gravity();
-        if (stickToWall && !moving && velocity.Length() < 0.1f) return;
-        acceleration = new Vec2(0, mass);
+        if (!stickToWall || (stickToWall && moving) || velocity.Length() >= 0.1f)
+        {
+            acceleration = new Vec2(0, mass);
+        }
     }
 
     public void Step()
     {
-        PlayerPhysics();
         PlayerControl();
+        PlayerPhysics();
         CheckCollision();
 
+        sticky.visible = stickToWall;
         velocity *= 0.99f;
         _oldPosition = position;
         UpdateScreenPosition();
@@ -66,20 +81,38 @@ public class Player : Sprite
 
     void PlayerControl()
     {
+        if (stickToWall && !inTheAir)
+        {
+            tt += 2f / 100f;
+            if (tt >= 4)
+            {
+                tt = 0f;
+                stickToWall = false;
+            }
+        }
+
         Vec2 deltaVec = position - new Vec2(Input.mouseX, Input.mouseY);
-        
-        if (Input.GetMouseButton(0))
+
+        if (Input.GetMouseButton(0) && IsMouseOver() && !inTheAir)
         {
             moving = false;
-            Gizmos.DrawArrow(position.x, position.y, deltaVec.x, deltaVec.y, 0.08f);
+            clickedPlayer = true;
         }
-        else if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0) && clickedPlayer)
         {
             velocity += deltaVec * .05f;
             moving = true;
+            stickToWall = true;
+            canPlay = true;
+            inTheAir = true;
+
+            clickedPlayer = false;
         }
 
-        if (Input.GetKeyDown(Key.SPACE)) { stickToWall = !stickToWall; }
+        if (clickedPlayer)
+            Gizmos.DrawArrow(position.x, position.y, deltaVec.x, deltaVec.y, 0.08f);
+
+        Console.WriteLine(clickedPlayer);
     }
 
 
@@ -143,11 +176,9 @@ public class Player : Sprite
         Vec2 firstnormal = new Vec2(0, 1);
         float FirstTOI = 2;
 
-
         // Check other movers:
         foreach (LineSegment lines in myGame.list)
         {
-
             Vec2 point = lines.start;
             Vec2 line = lines.start - lines.end;
 
@@ -168,7 +199,6 @@ public class Player : Sprite
                     otherCol = lines;
                     FirstTOI = t;
                     difline = ballDistance;
-
                 }
             }
         }
@@ -213,7 +243,8 @@ public class Player : Sprite
 
             if (minDist + 10 > dist)
             {
-                myGame.LoadLevel("level2.tmx");
+                myGame.CheckLoadLevel();
+                myGame.LoadLevel("level_2_real.tmx");
             }
         }
 
@@ -231,12 +262,19 @@ public class Player : Sprite
         MyGame myGame = (MyGame)game;
         if (col.other is LineSegment)
         {
+            inTheAir = false;
+
+            if (canPlay)
+                hitGround.Play();
+            canPlay = false;
+
             if (stickToWall)
             {
                 moving = false;
                 acceleration = new Vec2(0, 0);
                 velocity = new Vec2(0, 0);
             }
+            
             position -= (-difline + radius) * col.normal;
             velocity.Reflect(col.normal);
         }

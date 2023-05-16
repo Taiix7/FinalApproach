@@ -8,7 +8,13 @@ public class Vent : AnimationSprite
 
     private float detectionRangeY = 500f;
     private float ventWidth = 50f;
-    private float forcePower = -0.5f;
+    private float forcePower = 0.5f;
+
+    private Sound ventSound;
+    private SoundChannel ch;
+
+    private Sound ventSound;
+    private SoundChannel ch;
 
     public Vent(Vec2 _position, float forcePower) : base("flower-vent.png", 4,1)
     {
@@ -21,10 +27,14 @@ public class Vent : AnimationSprite
         myGame.vents.Add(this);
         x = position.x;
         y = position.y;
+
+        
+        ventSound = new Sound("vent_up.wav", true, false);
+        ch = ventSound.Play();
     }
 
     void Update() {
-        if (!isActive) return;
+        if (!isActive) { ch.Stop(); return;}
         Animate(0.1f);
     }
 
