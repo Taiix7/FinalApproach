@@ -27,12 +27,9 @@ public class Player : AnimationSprite
     private bool moving;
     public bool ceilling;
     private bool inTheAir;
-    public bool ceilling;
-    private bool inTheAir;
 
     private float tt = 0;
     Sprite sticky;
-    HUD hud;
 
     private SoundChannel channel;
     private Sound hitGround;
@@ -42,23 +39,11 @@ public class Player : AnimationSprite
 
     private bool clickedPlayer;
 
-    public Player(TiledObject obj = null) : base("Bounce Sheet Square.png",4,4)
+    public Player(TiledObject obj = null) : base("Im portant Plus.png", 8, 1)
     {
-
-        sticky = new Sprite("Slime_Luca.png");
-        sticky.width = 32;
-        sticky.height = 32;
-        sticky.SetXY(-16, -16);
-        
         position.x = obj.X;
         position.y = obj.Y;
-        sticky.width = 32;
-        sticky.height = 32;
-        sticky.SetXY(-16,-16);
-        AddChild(sticky);
-        hud = new HUD(this);
-        AddChild(hud);
-        
+
         SetOrigin(_radius, _radius);
 
         hitGround = new Sound("slime_hit.wav");
@@ -89,11 +74,21 @@ public class Player : AnimationSprite
 
     public void Step()
     {
-        sticky.visible = stickToWall;
+        if (moving && velocity.Length() > 3f)
+        {
+            Animate(0.03f);
+        }
+        if (stickToWall)
+        {
+            SetCycle(0, 4);
+        }
+        else if (!stickToWall)
+        {
+            SetCycle(4, 8);
+        }
         PlayerControl();
         PlayerPhysics();
         CheckCollision();
-        sticky.visible = stickToWall;
         velocity *= 0.99f;
         _oldPosition = position;
         UpdateScreenPosition();
@@ -101,37 +96,39 @@ public class Player : AnimationSprite
 
     void StickyTimer()
     {
+
         if (stickToWall && !inTheAir)
         {
             tt += 2f / 100f;
             if (tt >= 4)
             {
                 tt = 0f;
-                //stickToWall = false;
+                stickToWall = false;
             }
         }
     }
 
     void PlayerControl()
     {
-        StickyTimer();
+        if (ceilling)
+        {
+            StickyTimer();
+        }
 
         if (Input.GetKeyDown(Key.SPACE)) stickToWall = !stickToWall;
-
-        if (stickToWall && !inTheAir)
-        {
-            tt += 2f / 100f;
-            if (tt >= 4)
-            {
-                tt = 0f;
-                //stickToWall = false;
-            }
-        }
 
         Vec2 deltaVec = position - new Vec2(Input.mouseX, Input.mouseY);
 
         if (Input.GetMouseButton(0) && IsMouseOver() && !inTheAir)
         {
+            if (stickToWall)
+            {
+                SetFrame(1);
+            }
+            if (!stickToWall)
+            {
+                SetFrame(4);
+            }
             moving = false;
             clickedPlayer = true;
         }
@@ -149,9 +146,10 @@ public class Player : AnimationSprite
         }
 
         if (clickedPlayer && !stickToWall)
-            Gizmos.DrawArrow(position.x, position.y, deltaVec.x, deltaVec.y, 0.08f, null, 0xFF00FF00);
-        else if(clickedPlayer && stickToWall)
             Gizmos.DrawArrow(position.x, position.y, deltaVec.x, deltaVec.y, 0.08f, null, 0xFF800080);
+        else if (clickedPlayer && stickToWall)
+            Gizmos.DrawArrow(position.x, position.y, deltaVec.x, deltaVec.y, 0.08f, null, 0xFF00FF00);
+
     }
 
 
@@ -230,8 +228,36 @@ public class Player : AnimationSprite
 
                 if (t < FirstTOI)
                 {
+                    ceilling = false;
                     firstnormal = normalLine;
                     otherCol = lines;
+                    FirstTOI = t;
+                    difline = ballDistance;
+                }
+            }
+        }
+
+        foreach (LineSegment ceillings in myGame.ceillings)
+        {
+            Vec2 point = ceillings.start;
+            Vec2 line = ceillings.start - ceillings.end;
+
+            Vec2 normalLine = line.Normal();
+            Vec2 difference = point - position;
+
+            Vec2 oldDif = _oldPosition - point;
+
+            float ballDistance = difference.Dot(normalLine);
+
+            if (Mathf.Abs(ballDistance) <= radius)
+            {
+                float t = TOIBallLine(this, ceillings, oldDif, false);
+
+                if (t < FirstTOI)
+                {
+                    ceilling = true;
+                    firstnormal = normalLine;
+                    otherCol = ceillings;
                     FirstTOI = t;
                     difline = ballDistance;
                 }
@@ -248,9 +274,7 @@ public class Player : AnimationSprite
 
             if (minDist + 10 > dist)
             {
-                position.x = 150;
-                position.y = 700;
-                velocity = new Vec2(0, 0);
+                Dead();
             }
         }
 
@@ -264,9 +288,9 @@ public class Player : AnimationSprite
 
             if (minDist + 10 > dist)
             {
-                if(lever.connectedObject.isActive)
+                if (lever.connectedObject.isActive)
                 {
-                    for(int i=0; i<5; i++)
+                    for (int i = 0; i < 5; i++)
                     {
                         lever.NextFrame();
                     }
@@ -286,7 +310,15 @@ public class Player : AnimationSprite
             if (minDist + 10 > dist)
             {
                 channel = winSound.Play();
-                myGame.LoadLevel("level_2_real.tmx");
+                if(myGame.level == "level_1.tmx")
+                {
+                    myGame.LoadLevel("level_2_real.tmx");
+                    myGame.level = "level_2_real.tmx";
+                }
+                else if(myGame.level == "level_2_real.tmx")
+                {
+                    myGame.LoadLevel("level_3.tmx");
+                }
             }
         }
 
@@ -311,11 +343,16 @@ public class Player : AnimationSprite
 
             if (stickToWall)
             {
+                SetFrame(0);
                 moving = false;
                 acceleration = new Vec2(0, 0);
                 velocity = new Vec2(0, 0);
             }
-            
+            else
+            {
+                SetFrame(4);
+            }
+
             position -= (-difline + radius) * col.normal;
             velocity.Reflect(col.normal);
         }
@@ -331,6 +368,12 @@ public class Player : AnimationSprite
     {
         float distance = Mathf.Sqrt(Mathf.Pow(Input.mouseX - position.x, 2) + Mathf.Pow(Input.mouseY - position.y, 2));
         return distance <= radius + 5;
+    }
+
+    public void Dead() {
+        MyGame myGame = (MyGame)game;
+        myGame.CheckLoadLevel();
+        myGame.LoadLevel(myGame.currentLevel);
     }
 }
 

@@ -48,6 +48,7 @@ public class Vent : AnimationSprite
 
     public bool IsPlayerInRange(Player player)
     {
+        if (player == null) return false;
         float distanceY = Math.Abs(player.position.y - position.y);
         return distanceY <= detectionRangeY;
     }

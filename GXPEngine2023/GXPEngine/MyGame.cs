@@ -3,30 +3,34 @@ using GXPEngine;                                // GXPEngine contains the engine
 using System.Collections.Generic;
 using System.Threading;
 using TiledMapParser;
+using System.Reflection.Emit;
 
 public class MyGame : Game
 {
     public Vec2 deltaVec = new Vec2();
     public Vec2 empLines;
 
+    public string currentLevel;
+
     public List<NLineSegment> list = new List<NLineSegment>();
     public List<Spike> spikes = new List<Spike>();
     public List<Lever> levers = new List<Lever>();
     public List<Vent> vents = new List<Vent>();
     public List<Objective> objectives = new List<Objective>();
+    public List<NLineSegment> ceillings = new List<NLineSegment>();
 
-    string level = "level_1.tmx";
+    public string level = "opening.tmx";
     string nextlevel = null;
 
     private Level _level;
-
-    private float time;
 
     //Sounds
     private SoundChannel channel;
     private Sound level1;
     private Sound level2;
     private Sound level3;
+
+    public int levelNum;
 
 
     public MyGame() : base(1920, 1080, false)     // Create a window that's 800x600 and NOT fullscreen
@@ -42,14 +46,22 @@ public class MyGame : Game
     void Update()
     {
         if (_level == null) return;
-        _level.player.Step();
-        Timer();
-
+        if(_level.player != null) { _level.player.Step(); }
+        _level.hud.Timer();
         foreach (Vent vent in vents)
         {
             if (vent.IsPlayerInRange(_level.player))
             {
                 vent.ApplyVentEffect(_level.player);
+            }
+        }
+
+        if(level == "opening.tmx")
+        {
+            if(Input.GetMouseButtonUp(0))
+            {
+                level = "level_1.tmx";
+                LoadLevel(level);
             }
         }
     }
@@ -84,32 +96,58 @@ public class MyGame : Game
         {
             lines.Destroy();
         }
-        foreach(Spike spike in spikes)
+        foreach (Spike spike in spikes)
         {
             spike.Destroy();
         }
+        foreach(NLineSegment ceillings in ceillings)
+        {
+            ceillings.Destroy();
+        }
+        foreach (GameObject objectives in objectives)
+        {
+            objectives.Destroy();
+        }
         list.Clear();
         spikes.Clear();
+        ceillings.Clear();
+        objectives.Clear();
     }
 
     public void CheckLoadLevel()
     {
         if (nextlevel != null)
         {
+
+            currentLevel = nextlevel;
             DestroyLevel();
             _level = new Level(nextlevel);
             AddChild(_level);
+
+            switch (nextlevel)
+            {
+                case "level_1.tmx":
+                    if (channel != null)
+                        channel.Stop();
+
+                    channel = level1.Play();
+                    _level.hud.timeLeft = 120f;
+                    break;
+                case "level_2_real.tmx":
+                    channel.Stop();
+                    channel = level2.Play();
+                    _level.hud.timeLeft = 180f;
+                    break;
+                case "level_3.tmx":
+                    channel.Stop();
+                    channel = level3.Play();
+                    _level.hud.timeLeft = 300f;
+                    break;
+            }
+
             nextlevel = null;
         }
     }
-
-    void Timer()
-    {
-        time = Time.time / 1000;
-        int min = (int)Math.Floor(time / 60);
-        int sec = (int)Math.Floor(time % 60);
-    }
-
 
     static void Main()                          // Main() is the first method that's called when the program is run
     {

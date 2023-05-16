@@ -5,7 +5,7 @@ namespace GXPEngine
     class Level : GameObject
     {
         TiledLoader loader;
-        HUD hud;
+        public HUD hud;
 
         public Player player { get; private set; }
         public Level(string filename)
@@ -23,16 +23,6 @@ namespace GXPEngine
             player = FindObjectOfType<Player>();
             hud = new HUD(player);
             AddChildAt(hud, GetChildCount()-1);
-
-
-        }
-
-        void Update()
-        {
-            if(player.ceilling)
-            {
-                //hud.StickToCeiling();
-            }
         }
     }
 }
