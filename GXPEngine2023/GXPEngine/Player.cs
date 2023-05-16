@@ -23,23 +23,29 @@ public class Player : AnimationSprite
     public Vec2 acceleration;
     public Vec2 _oldPosition;
 
-    private bool stickToWall = false;
+    public bool stickToWall;
     private bool moving;
     public bool ceilling;
     private bool inTheAir;
 
     private float tt = 0;
     Sprite sticky;
+    HUD hud;
 
     private Sound hitGround;
     private bool canPlay = true;
     private bool clickedPlayer;
     public Player(TiledObject obj = null) : base("Bounce Sheet Square.png",4,4)
     {
-
+        sticky = new Sprite("Slime_Luca.png");
         position.x = obj.X;
         position.y = obj.Y;
+        sticky.width = 32;
+        sticky.height = 32;
+        sticky.SetXY(-16,-16);
         AddChild(sticky);
+        hud = new HUD(this);
+        AddChild(hud);
         //UpdateScreenPosition();
         SetOrigin(_radius, _radius);
 
@@ -69,11 +75,10 @@ public class Player : AnimationSprite
 
     public void Step()
     {
+        sticky.visible = stickToWall;
         PlayerControl();
         PlayerPhysics();
         CheckCollision();
-
-        sticky.visible = stickToWall;
         velocity *= 0.99f;
         _oldPosition = position;
         UpdateScreenPosition();
@@ -87,7 +92,7 @@ public class Player : AnimationSprite
             if (tt >= 4)
             {
                 tt = 0f;
-                stickToWall = false;
+                //stickToWall = false;
             }
         }
 
@@ -102,7 +107,6 @@ public class Player : AnimationSprite
         {
             velocity += deltaVec * .05f;
             moving = true;
-            stickToWall = true;
             canPlay = true;
             inTheAir = true;
 
@@ -110,7 +114,12 @@ public class Player : AnimationSprite
         }
 
         if (clickedPlayer)
-            Gizmos.DrawArrow(position.x, position.y, deltaVec.x, deltaVec.y, 0.08f);
+            Gizmos.DrawArrow(position.x, position.y, deltaVec.x, deltaVec.y, 0.08f,null, 0x00FF00);
+
+        if (Input.GetKeyDown(Key.SPACE))
+        {
+            stickToWall = !stickToWall;
+        }
 
         Console.WriteLine(clickedPlayer);
     }
@@ -229,6 +238,13 @@ public class Player : AnimationSprite
 
             if (minDist + 10 > dist)
             {
+                if(lever.connectedObject.isActive)
+                {
+                    for(int i=0; i<5; i++)
+                    {
+                        lever.NextFrame();
+                    }
+                }
                 lever.connectedObject.isActive = false;
             }
         }

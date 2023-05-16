@@ -13,9 +13,6 @@ public class Vent : AnimationSprite
     private Sound ventSound;
     private SoundChannel ch;
 
-    private Sound ventSound;
-    private SoundChannel ch;
-
     public Vent(Vec2 _position, float forcePower) : base("flower-vent.png", 4,1)
     {
         position.x = _position.x;
