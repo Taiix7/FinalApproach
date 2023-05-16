@@ -28,18 +28,24 @@ public class Player : Sprite
 
     private float tt = 0;
 
+    private SoundChannel channel;
     private Sound hitGround;
+    private Sound jumpSound;
+    private Sound winSound;
     private bool canPlay = true;
+
     private bool clickedPlayer;
+
     public Player(TiledObject obj = null) : base("Slime_Luca.png")
     {
 
         position.x = obj.X;
         position.y = obj.Y;
-        //UpdateScreenPosition();
         SetOrigin(_radius, _radius);
 
         hitGround = new Sound("slime_hit.wav");
+        jumpSound = new Sound("slime_bounce.wav");
+        winSound = new Sound("nextlevel.wav");
     }
 
     public void Gravity()
@@ -73,7 +79,7 @@ public class Player : Sprite
         UpdateScreenPosition();
     }
 
-    void PlayerControl()
+    void StickyTimer()
     {
         if (stickToWall && !inTheAir)
         {
@@ -84,6 +90,13 @@ public class Player : Sprite
                 stickToWall = false;
             }
         }
+    }
+
+    void PlayerControl()
+    {
+        StickyTimer();
+
+        if (Input.GetKeyDown(Key.SPACE)) stickToWall = !stickToWall;
 
         Vec2 deltaVec = position - new Vec2(Input.mouseX, Input.mouseY);
 
@@ -95,6 +108,9 @@ public class Player : Sprite
         else if (Input.GetMouseButtonUp(0) && clickedPlayer)
         {
             velocity += deltaVec * .05f;
+
+            channel = jumpSound.Play();
+
             moving = true;
             stickToWall = true;
             canPlay = true;
@@ -103,10 +119,10 @@ public class Player : Sprite
             clickedPlayer = false;
         }
 
-        if (clickedPlayer)
-            Gizmos.DrawArrow(position.x, position.y, deltaVec.x, deltaVec.y, 0.08f);
-
-        Console.WriteLine(clickedPlayer);
+        if (clickedPlayer && !stickToWall)
+            Gizmos.DrawArrow(position.x, position.y, deltaVec.x, deltaVec.y, 0.08f, null, 0xFF00FF00);
+        else if(clickedPlayer && stickToWall)
+            Gizmos.DrawArrow(position.x, position.y, deltaVec.x, deltaVec.y, 0.08f, null, 0xFF800080);
     }
 
 
@@ -122,7 +138,6 @@ public class Player : Sprite
 
         if (b <= 0) return 10;
 
-
         if (a >= 0)
         {
             t = a / b;
@@ -132,7 +147,6 @@ public class Player : Sprite
             t = 0;
         }
         else return 10;
-
 
         if (t < 1)
         {
@@ -146,8 +160,6 @@ public class Player : Sprite
 
         }
         else return 10;
-
-
     }
 
     public void CheckCollision()
@@ -238,9 +250,9 @@ public class Player : Sprite
             if (minDist + 10 > dist)
             {
                 myGame.LoadLevel("level2.tmx");
+                channel = winSound.Play();
             }
         }
-
 
         if (FirstTOI < 1)
         {

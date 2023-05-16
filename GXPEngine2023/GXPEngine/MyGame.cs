@@ -20,17 +20,25 @@ public class MyGame : Game
 
     private float time;
 
+    //Sounds
+    private SoundChannel channel;
+    private Sound level1;
+    private Sound level2;
+    private Sound level3;
+
+
     public MyGame() : base(1920, 1080, false)     // Create a window that's 800x600 and NOT fullscreen
     {
+        level1 = new Sound("lvl1song.wav", true);
+        level2 = new Sound("lvl2song.wav", true);
+        level3 = new Sound("lvl3song.wav", true);
+
         OnAfterStep += CheckLoadLevel;
         LoadLevel(level);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(Key.P))
-            LoadLevel("Level1.tmx");
-
         if (_level == null) return;
         _level.player.Step();
         Timer();
@@ -47,6 +55,20 @@ public class MyGame : Game
     public void LoadLevel(string levelName)
     {
         nextlevel = levelName;
+        
+        switch (levelName) {
+            case "level_1.tmx":
+                channel = level1.Play();
+                    break;
+            case "level_2.tmx":
+                channel.Stop();
+                channel = level2.Play();
+                break;
+            case "level_3.tmx":
+                channel.Stop();
+                channel = level3.Play();
+                break;
+        }
     }
 
     void DestroyLevel()
@@ -71,7 +93,6 @@ public class MyGame : Game
 
     void Timer()
     {
-
         time = Time.time / 1000;
         int min = (int)Math.Floor(time / 60);
         int sec = (int)Math.Floor(time % 60);
