@@ -36,6 +36,7 @@ public class Player : AnimationSprite
     private bool clickedPlayer;
     public Player(TiledObject obj = null) : base("Bounce Sheet Square.png",4,4)
     {
+
         position.x = obj.X;
         position.y = obj.Y;
         AddChild(sticky);
