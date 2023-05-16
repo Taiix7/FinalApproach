@@ -10,7 +10,7 @@ public class Lever : AnimationSprite
 
     public TiledObject obj;
 
-    public Lever(TiledObject obj = null) : base("lever.png", 2, 3)
+    public Lever(TiledObject obj = null) : base("button-sprite-sheet-64x64-v2.png", 6, 1)
     {
         this.obj = obj;
         position.x = obj.X;
@@ -20,7 +20,7 @@ public class Lever : AnimationSprite
         SetOrigin(radius, radius);
         MyGame myGame = (MyGame)game;
         myGame.levers.Add(this);
-        
+
         CreateResponsiveObject();
         myGame.LateAddChild(connectedObject);
     }
@@ -45,7 +45,7 @@ public class Lever : AnimationSprite
     {
         float floatValueX = 0;
         float floatValueY = 0;
-        float force = 0;
+        float force = 0.5f;
 
         foreach (Property property in obj.propertyList.properties)
         {
@@ -57,14 +57,16 @@ public class Lever : AnimationSprite
             {
                 floatValueY = float.Parse(property.Value);
             }
-            else if (property.Name == "force") { 
-                force = float.Parse(property.Value);
+            else if (property.Name == "force")
+            {
+                //force = float.Parse(property.Value);
             }
         }
         connectedObject = new Vent(new Vec2(floatValueX, floatValueY), force);
         if (force == 0.5f)
             connectedObject.SetScaleXY(connectedObject.scaleX, connectedObject.scaleY * -1);
-        else {
+        else
+        {
             connectedObject.SetScaleXY(connectedObject.scaleX, connectedObject.scaleY);
         }
     }

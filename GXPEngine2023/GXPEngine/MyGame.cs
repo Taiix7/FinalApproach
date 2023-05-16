@@ -1,8 +1,8 @@
 using System;                                   // System contains a lot of default C# libraries 
 using GXPEngine;                                // GXPEngine contains the engine
-using System.Drawing;                           // System.Drawing contains drawing tools such as Color definitions
 using System.Collections.Generic;
 using System.Threading;
+using TiledMapParser;
 
 public class MyGame : Game
 {
@@ -22,24 +22,33 @@ public class MyGame : Game
 
     private float time;
 
+    //Sounds
+    private SoundChannel channel;
+    private Sound level1;
+    private Sound level2;
+    private Sound level3;
+
+
     public MyGame() : base(1920, 1080, false)     // Create a window that's 800x600 and NOT fullscreen
     {
+        level1 = new Sound("lvl1song.wav", true);
+        level2 = new Sound("lvl2song.wav", true);
+        level3 = new Sound("lvl3song.wav", true);
+
         OnAfterStep += CheckLoadLevel;
         LoadLevel(level);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(Key.P))
-            LoadLevel("Level1.tmx");
-
         if (_level == null) return;
         _level.player.Step();
         Timer();
-        
-            foreach (Vent vent in vents)
+
+        foreach (Vent vent in vents)
         {
-            if (vent.IsPlayerInRange(_level.player)) {
+            if (vent.IsPlayerInRange(_level.player))
+            {
                 vent.ApplyVentEffect(_level.player);
             }
         }
@@ -48,6 +57,20 @@ public class MyGame : Game
     public void LoadLevel(string levelName)
     {
         nextlevel = levelName;
+        
+        switch (levelName) {
+            case "level_1.tmx":
+                channel = level1.Play();
+                    break;
+            case "level_2.tmx":
+                channel.Stop();
+                channel = level2.Play();
+                break;
+            case "level_3.tmx":
+                channel.Stop();
+                channel = level3.Play();
+                break;
+        }
     }
 
     void DestroyLevel()
@@ -57,9 +80,19 @@ public class MyGame : Game
         {
             child.Destroy();
         }
+        foreach (NLineSegment lines in list)
+        {
+            lines.Destroy();
+        }
+        foreach(Spike spike in spikes)
+        {
+            spike.Destroy();
+        }
+        list.Clear();
+        spikes.Clear();
     }
 
-    void CheckLoadLevel()
+    public void CheckLoadLevel()
     {
         if (nextlevel != null)
         {
@@ -70,13 +103,11 @@ public class MyGame : Game
         }
     }
 
-    void Timer() {
-
+    void Timer()
+    {
         time = Time.time / 1000;
         int min = (int)Math.Floor(time / 60);
         int sec = (int)Math.Floor(time % 60);
-
-        Console.WriteLine(string.Format("{0:00}:{1:00}", min, sec));
     }
 
 

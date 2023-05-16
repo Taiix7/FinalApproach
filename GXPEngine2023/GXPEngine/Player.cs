@@ -1,8 +1,9 @@
 using GXPEngine;
 using System;
+using System.Reflection.Emit;
 using TiledMapParser;
 
-public class Player : Sprite
+public class Player : AnimationSprite
 {
     public int radius { get { return _radius; } }
 
@@ -22,16 +23,47 @@ public class Player : Sprite
     public Vec2 acceleration;
     public Vec2 _oldPosition;
 
-    private bool stickToWall;
+    public bool stickToWall;
     private bool moving;
+    public bool ceilling;
+    private bool inTheAir;
+    public bool ceilling;
+    private bool inTheAir;
 
+    private float tt = 0;
+    Sprite sticky;
+    HUD hud;
 
-    public Player(TiledObject obj = null) : base("Slime_Luca.png")
+    private SoundChannel channel;
+    private Sound hitGround;
+    private Sound jumpSound;
+    private Sound winSound;
+    private bool canPlay = true;
+
+    private bool clickedPlayer;
+
+    public Player(TiledObject obj = null) : base("Bounce Sheet Square.png",4,4)
     {
+
+        sticky = new Sprite("Slime_Luca.png");
+        sticky.width = 32;
+        sticky.height = 32;
+        sticky.SetXY(-16, -16);
+        
         position.x = obj.X;
         position.y = obj.Y;
-        //UpdateScreenPosition();
+        sticky.width = 32;
+        sticky.height = 32;
+        sticky.SetXY(-16,-16);
+        AddChild(sticky);
+        hud = new HUD(this);
+        AddChild(hud);
+        
         SetOrigin(_radius, _radius);
+
+        hitGround = new Sound("slime_hit.wav");
+        jumpSound = new Sound("slime_bounce.wav");
+        winSound = new Sound("nextlevel.wav");
     }
 
     public void Gravity()
@@ -49,37 +81,77 @@ public class Player : Sprite
     void PlayerPhysics()
     {
         Gravity();
-        if (stickToWall && !moving && velocity.Length() < 0.1f) return;
-        acceleration = new Vec2(0, mass);
+        if (!stickToWall || (stickToWall && moving) || velocity.Length() >= 0.1f)
+        {
+            acceleration = new Vec2(0, mass);
+        }
     }
 
     public void Step()
     {
-        PlayerPhysics();
+        sticky.visible = stickToWall;
         PlayerControl();
+        PlayerPhysics();
         CheckCollision();
-
+        sticky.visible = stickToWall;
         velocity *= 0.99f;
         _oldPosition = position;
         UpdateScreenPosition();
     }
 
+    void StickyTimer()
+    {
+        if (stickToWall && !inTheAir)
+        {
+            tt += 2f / 100f;
+            if (tt >= 4)
+            {
+                tt = 0f;
+                //stickToWall = false;
+            }
+        }
+    }
+
     void PlayerControl()
     {
-        Vec2 deltaVec = position - new Vec2(Input.mouseX, Input.mouseY);
-        
-        if (Input.GetMouseButton(0))
+        StickyTimer();
+
+        if (Input.GetKeyDown(Key.SPACE)) stickToWall = !stickToWall;
+
+        if (stickToWall && !inTheAir)
         {
-            moving = false;
-            Gizmos.DrawArrow(position.x, position.y, deltaVec.x, deltaVec.y, 0.08f);
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            velocity += deltaVec * .05f;
-            moving = true;
+            tt += 2f / 100f;
+            if (tt >= 4)
+            {
+                tt = 0f;
+                //stickToWall = false;
+            }
         }
 
-        if (Input.GetKeyDown(Key.SPACE)) { stickToWall = !stickToWall; }
+        Vec2 deltaVec = position - new Vec2(Input.mouseX, Input.mouseY);
+
+        if (Input.GetMouseButton(0) && IsMouseOver() && !inTheAir)
+        {
+            moving = false;
+            clickedPlayer = true;
+        }
+        else if (Input.GetMouseButtonUp(0) && clickedPlayer)
+        {
+            velocity += deltaVec * .05f;
+
+            channel = jumpSound.Play();
+
+            moving = true;
+            canPlay = true;
+            inTheAir = true;
+
+            clickedPlayer = false;
+        }
+
+        if (clickedPlayer && !stickToWall)
+            Gizmos.DrawArrow(position.x, position.y, deltaVec.x, deltaVec.y, 0.08f, null, 0xFF00FF00);
+        else if(clickedPlayer && stickToWall)
+            Gizmos.DrawArrow(position.x, position.y, deltaVec.x, deltaVec.y, 0.08f, null, 0xFF800080);
     }
 
 
@@ -95,7 +167,6 @@ public class Player : Sprite
 
         if (b <= 0) return 10;
 
-
         if (a >= 0)
         {
             t = a / b;
@@ -105,7 +176,6 @@ public class Player : Sprite
             t = 0;
         }
         else return 10;
-
 
         if (t < 1)
         {
@@ -119,8 +189,6 @@ public class Player : Sprite
 
         }
         else return 10;
-
-
     }
 
     public void CheckCollision()
@@ -143,11 +211,9 @@ public class Player : Sprite
         Vec2 firstnormal = new Vec2(0, 1);
         float FirstTOI = 2;
 
-
         // Check other movers:
         foreach (LineSegment lines in myGame.list)
         {
-
             Vec2 point = lines.start;
             Vec2 line = lines.start - lines.end;
 
@@ -168,7 +234,6 @@ public class Player : Sprite
                     otherCol = lines;
                     FirstTOI = t;
                     difline = ballDistance;
-
                 }
             }
         }
@@ -199,6 +264,13 @@ public class Player : Sprite
 
             if (minDist + 10 > dist)
             {
+                if(lever.connectedObject.isActive)
+                {
+                    for(int i=0; i<5; i++)
+                    {
+                        lever.NextFrame();
+                    }
+                }
                 lever.connectedObject.isActive = false;
             }
         }
@@ -213,10 +285,10 @@ public class Player : Sprite
 
             if (minDist + 10 > dist)
             {
-                myGame.LoadLevel("level2.tmx");
+                channel = winSound.Play();
+                myGame.LoadLevel("level_2_real.tmx");
             }
         }
-
 
         if (FirstTOI < 1)
         {
@@ -231,12 +303,19 @@ public class Player : Sprite
         MyGame myGame = (MyGame)game;
         if (col.other is LineSegment)
         {
+            inTheAir = false;
+
+            if (canPlay)
+                hitGround.Play();
+            canPlay = false;
+
             if (stickToWall)
             {
                 moving = false;
                 acceleration = new Vec2(0, 0);
                 velocity = new Vec2(0, 0);
             }
+            
             position -= (-difline + radius) * col.normal;
             velocity.Reflect(col.normal);
         }
