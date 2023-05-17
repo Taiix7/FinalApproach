@@ -38,7 +38,7 @@ public class Vent : AnimationSprite
         y = position.y;
 
         
-        ventSound = new Sound("vent_up.wav", true, false);
+        ventSound = new Sound("wind.wav", true, false);
         ch = ventSound.Play();
     }
 

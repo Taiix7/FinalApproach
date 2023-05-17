@@ -43,7 +43,6 @@
     <Compile Include="Button.cs" />
     <Compile Include="CeillingLine.cs" />
     <Compile Include="CollisionInfo.cs" />
-    <Compile Include="Door.cs" />
     <Compile Include="GXPEngine\AddOns\Gizmos.cs" />
     <Compile Include="GXPEngine\AddOns\SpriteBatch.cs" />
     <Compile Include="GXPEngine\AddOns\TiledLoader.cs" />

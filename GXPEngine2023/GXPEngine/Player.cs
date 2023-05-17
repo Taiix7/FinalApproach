@@ -340,12 +340,12 @@ public class Player : AnimationSprite
             if (minDist + 10 > dist)
             {
                 channel = winSound.Play();
-                if(myGame.level == "level_1.tmx")
+                if(myGame.level == "level_1_final.tmx")
                 {
-                    myGame.LoadLevel("level_2_real.tmx");
-                    myGame.level = "level_2_real.tmx";
+                    myGame.LoadLevel("level_2_real_final.tmx");
+                    myGame.level = "level_2_real_final.tmx";
                 }
-                else if(myGame.level == "level_2_real.tmx")
+                else if(myGame.level == "level_2_real_final.tmx")
                 {
                     myGame.LoadLevel("level_3.tmx");
                 }

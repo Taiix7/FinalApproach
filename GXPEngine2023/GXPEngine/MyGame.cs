@@ -19,7 +19,6 @@ public class MyGame : Game
     public List<Objective> objectives = new List<Objective>();
     public List<NLineSegment> ceillings = new List<NLineSegment>();
     public List<Button> buttons = new List<Button>();
-    public List<NLineSegment> doors = new List<NLineSegment>();
 
     public string level = "opening.tmx";
     string nextlevel = null;
@@ -62,7 +61,7 @@ public class MyGame : Game
         {
             if(Input.GetMouseButtonUp(0))
             {
-                level = "level_1.tmx";
+                level = "level_1_final.tmx";
                 LoadLevel(level);
             }
         }
@@ -101,16 +100,11 @@ public class MyGame : Game
         {
             button.Destroy();
         }
-        foreach (NLineSegment door in doors)
-        {
-            door.Destroy();
-        }
         list.Clear();
         spikes.Clear();
         ceillings.Clear();
         objectives.Clear();
         buttons.Clear();
-        doors.Clear();
     }
 
     public void CheckLoadLevel()
@@ -125,14 +119,14 @@ public class MyGame : Game
 
             switch (nextlevel)
             {
-                case "level_1.tmx":
+                case "level_1_final.tmx":
                     if (channel != null)
                         channel.Stop();
 
                     channel = level1.Play();
                     _level.hud.timeLeft = 120f;
                     break;
-                case "level_2_real.tmx":
+                case "level_2_real_final.tmx":
                     channel.Stop();
                     channel = level2.Play();
                     _level.hud.timeLeft = 180f;
